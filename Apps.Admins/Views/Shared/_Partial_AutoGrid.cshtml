@@ -1,0 +1,22 @@
+﻿<!--自动GRID 从第一次加载与重置窗体大小时候发生的事件:分部视图，当只有一个Grid时且ID为List-->
+<script type="text/javascript">
+    $(function () {
+        $(window).resize(function () {
+            $('#List').datagrid('resize', {
+                width: $(window).width() - 10,
+                height: SetGridHeightSub(39)
+            }).datagrid('resize', {
+                width: $(window).width() - 10,
+                height: SetGridHeightSub(39)
+            });
+        });
+
+    });
+    //生成唯一的GUID
+    function GetGuid() {
+        var s4 = function () {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        };
+        return s4() + s4() + s4() + "-" + s4();
+    }
+</script>

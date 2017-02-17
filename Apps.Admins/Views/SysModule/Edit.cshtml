@@ -1,0 +1,132 @@
+﻿
+@model Apps.Models.Sys.SysModuleModel
+@using Apps.Common;
+@using Apps.Models.Sys;
+@using Apps.Admins;
+@using Apps.Admins.Core;
+@{
+    ViewBag.Title = "修改";
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<permModel> perm = (List<permModel>)ViewBag.Perm;
+    if (perm == null)
+    {
+        perm = new List<permModel>();
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").click(function () {
+            if ($("form").valid()) {
+                $.ajax({
+                    url: "@Url.Action("Edit")",
+                    type: "Post",
+                    data: $("form").serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.type == 1) {
+                            window.parent.frameReturnByMes(data.message);
+                            window.parent.frameReturnByReload(true);
+                            window.parent.frameReturnByClose()
+                        }
+                        else {
+                            window.parent.frameReturnByMes(data.message);
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose();
+        });
+    });
+</script>
+<div class="mvctool bgb">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CreateTime)
+    @Html.HiddenFor(model => model.CreatePerson)
+
+    <table class="fromEditTable setTextWidth300">
+        <tbody>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Name)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Name)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.ParentId)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.ParentId)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.ParentId)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Url)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Url)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Url)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Iconic)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Iconic)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Iconic)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Sort)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Sort)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Sort)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Remark)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Remark)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Remark)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Enable)：
+                </td>
+                <td style="width:310px">
+                    @Html.CheckBoxFor(model => model.Enable)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Enable)</td>
+            </tr>
+
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.IsLast)：
+                </td>
+                <td style="width:310px">
+                    @Html.CheckBoxFor(model => model.IsLast)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.IsLast)</td>
+            </tr>
+        </tbody>
+    </table>
+}

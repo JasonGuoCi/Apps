@@ -1,0 +1,154 @@
+﻿@using Apps.Admins;
+@using Apps.Common;
+@using Apps.Models.Sys;
+@using Apps.Admins.Core;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index_Layout.cshtml";
+    List<permModel> perm = (List<permModel>)ViewBag.Perm;
+
+    if (perm == null)
+    {
+        perm = new List<permModel>();
+    }
+}
+<script src="~/Scripts/jquery.easyui.plus.js"></script>
+<div class="mvctool">
+    <input id="txtQuery" type="text" class="searchText" />
+    @Html.ToolButton("btnQuery", "icon-search", "查询", perm, "Query", true)
+    @Html.ToolButton("btnCreate", "icon-add", "新增", perm, "Create", true)
+    @Html.ToolButton("btnEdit", "icon-edit", "编辑", perm, "Edit", true)
+    @Html.ToolButton("btnDetails", "icon-details", "详细", perm, "Details", true)
+    @Html.ToolButton("btnDelete", "icon-remove", "删除", perm, "Delete", true)
+    @Html.ToolButton("btnAllot", "icon-share", "分配角色", perm, "Allot", true)
+</div>
+<table id="List"></table>
+<div id="modalwindow" class="easyui-window" data-options="modal:true,closed:true,minimizable:false,shadow:false"></div>
+@Html.Partial("~/Views/Shared/_Partial_AutoGrid.cshtml")
+<script type="text/javascript">
+    $(function () {
+        $('#List').datagrid({
+            url: '@Url.Action("GetList")',
+            width: $(window).width() - 10,
+            methord: 'post',
+            height: $(window).height() - 35,
+            fitColumns: true,
+            sortName: 'CreateTime',
+            sortOrder: 'desc',
+            idField: 'Id',
+            pageSize: 15,
+            pageList: [15, 20, 30, 40, 50],
+            pagination: true,
+            striped: true, //奇偶行是否区分
+            singleSelect: true,//单选模式
+            //rownumbers: true,//行号
+            columns: [[
+                { field: 'Id', title: '', width: 80, hidden: true },
+                { field: 'UserName', title: '用户名', width: 80, sortable: true },
+                //{ field: 'Password', title: '', width: 80, sortable: true },
+                { field: 'TrueName', title: '真实名字', width: 80, sortable: true },
+                //{ field: 'Card', title: '', width: 80, sortable: true },
+                //{ field: 'MobileNumber', title: '身份证', width: 80, sortable: true },
+                { field: 'PhoneNumber', title: '电话号码', width: 80, sortable: true },
+                //{ field: 'QQ', title: 'QQ', width: 80, sortable: true },
+                { field: 'EmailAddress', title: '邮箱', width: 80, sortable: true },
+               // { field: 'OtherContact', title: '其他联系人', width: 80, sortable: true },
+                //{ field: 'Province', title: '省', width: 80, sortable: true },
+                //{ field: 'City', title: '市', width: 80, sortable: true },
+                //{ field: 'Village', title: '村', width: 80, sortable: true },
+                //{ field: 'Address', title: '地址', width: 80, sortable: true },
+                { field: 'State', title: '是否启用', width: 80, sortable: true },
+                { field: 'CreateTime', title: '创建时间', width: 80, sortable: true },
+                { field: 'CreatePerson', title: '创建人', width: 80, sortable: true },
+                //{ field: 'Sex', title: '性别', width: 80, sortable: true },
+                //{ field: 'Birthday', title: '生日', width: 80, sortable: true },
+                ////{ field: 'JoinDate', title: '加入日期', width: 80, sortable: true },
+                //{ field: 'Marital', title: '婚姻', width: 80, sortable: true },
+                //{ field: 'Political', title: '党派', width: 80, sortable: true },
+                //{ field: 'Nationality', title: '民族', width: 80, sortable: true },
+                //{ field: 'Native', title: '籍贯', width: 80, sortable: true },
+                //{ field: 'School', title: '毕业学校', width: 80, sortable: true },
+                //{ field: 'Professional', title: '就读专业', width: 80, sortable: true },
+                //{ field: 'Degree', title: '学历', width: 80, sortable: true },
+                //{ field: 'DepId', title: '部门', width: 80, sortable: true },
+                //{ field: 'PosId', title: '职位', width: 80, sortable: true },
+                //{ field: 'Expertise', title: '个人简介', width: 80, sortable: true },
+                //{ field: 'JobState', title: '在职状况', width: 80, sortable: true },
+                //{ field: 'Photo', title: '照片', width: 80, sortable: true },
+                //{ field: 'Attach', title: '附件', width: 80, sortable: true },
+                 //{ field: 'Flag', title: '是否分配', width: 80, sortable: true }
+            ]]
+        });
+    });
+    //ifram 返回
+    function frameReturnByClose() {
+        $("#modalwindow").window('close');
+    }
+    function frameReturnByReload(flag) {
+        if (flag)
+            $("#List").datagrid('load');
+        else
+            $("#List").datagrid('reload');
+    }
+    function frameReturnByMes(mes) {
+        $.messageBox5s('提示', mes);
+    }
+    $(function () {
+        $("#btnExport").click(function () {
+            $("#modalwindow").html("<iframe width='100%' height='98%' scrolling='no' frameborder='0'' src='/SysHelper/ReportControl'></iframe>");
+            $("#modalwindow").window({ title: '导出', width: 320, height: 200, iconCls: 'icon-add' }).window('open');
+        });
+        $("#btnCreate").click(function () {
+            $("#modalwindow").html("<iframe width='100%' height='98%' scrolling='no' frameborder='0'' src='/SysUser/Create'></iframe>");
+            $("#modalwindow").window({ title: '新增', width: 700, height: 400, iconCls: 'icon-add' }).window('open');
+        });
+        $("#btnEdit").click(function () {
+            var row = $('#List').datagrid('getSelected');
+            if (row != null) {
+                $("#modalwindow").html("<iframe width='100%' height='99%'  frameborder='0' src='/SysUser/Edit?id=" + row.Id + "&Ieguid=" + GetGuid() + "'></iframe>");
+                $("#modalwindow").window({ title: '编辑', width: 700, height: 430, iconCls: 'icon-edit' }).window('open');
+            } else { $.messageBox5s('提示', '@Suggestion.PlaseChooseToOperatingRecords'); }
+        });
+        $("#btnDetails").click(function () {
+            var row = $('#List').datagrid('getSelected');
+            if (row != null) {
+                $("#modalwindow").html("<iframe width='100%' height='98%' scrolling='no' frameborder='0' src='/SysUser/Details?id=" + row.Id + "&Ieguid=" + GetGuid() + "'></iframe>");
+                $("#modalwindow").window({ title: '详细', width: 500, height: 300, iconCls: 'icon-details' }).window('open');
+            } else { $.messageBox5s('提示', '@Suggestion.PlaseChooseToOperatingRecords'); }
+        });
+        $("#btnQuery").click(function () {
+            var queryStr = $("#txtQuery").val();
+            if (queryStr == null) {
+                queryStr = "%";
+            }
+            $('#List').datagrid({
+                url: '@Url.Action("GetList")?queryStr=' + encodeURI(queryStr)
+            });
+
+        });
+        $("#btnDelete").click(function () {
+            var row = $('#List').datagrid('getSelected');
+            if (row != null) {
+                $.messager.confirm('提示', '@Suggestion.YouWantToDeleteTheSelectedRecords', function (r) {
+                    if (r) {
+                        $.post("@Url.Action("Delete")?id=" + row.Id, function (data) {
+                            if (data.type == 1)
+                                $("#List").datagrid('load');
+                            $.messageBox5s('提示', data.message);
+                        }, "json");
+
+                    }
+                });
+            } else { $.messageBox5s('提示', '@Suggestion.PlaseChooseToOperatingRecords'); }
+        });
+
+        $("#btnAllot").click(function () {
+            var row = $('#List').datagrid('getSelected');
+            if (row != null) {
+
+                $("#modalwindow").html("<iframe width='100%'  height='100%' scrolling='auto' frameborder='0' src='/SysUser/GetRoleByUser?userId=" + row.Id + "&Iedate=" + GetGuid() + "'></iframe>");
+                $("#modalwindow").window({ title: '分配角色', width: 720, height: 400, iconCls: 'icon-edit' }).window('open');
+            } else { $.messageBox5s('提示', '@Suggestion.PlaseChooseToOperatingRecords'); }
+        });
+    });
+</script>

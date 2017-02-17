@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c3535c0abd94a11a27db3a9b9a1dfb9" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="AppsDBModel.SysSample" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppsDBModel.SysModule" Width="1.5" PointX="0.75" PointY="4.25" />
+        <AssociationConnector Association="AppsDBModel.FK_SysModule_SysModule" />
+        <EntityTypeShape EntityType="AppsDBModel.SysLog" Width="1.5" PointX="8.5" PointY="1.25" />
+        <EntityTypeShape EntityType="AppsDBModel.SysException" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AppsDBModel.SysModuleOperate" Width="1.5" PointX="3.125" PointY="10.125" />
+        <EntityTypeShape EntityType="AppsDBModel.SysRight" Width="1.5" PointX="3.5" PointY="4" />
+        <EntityTypeShape EntityType="AppsDBModel.SysRightOperate" Width="1.5" PointX="4.125" PointY="7.125" />
+        <EntityTypeShape EntityType="AppsDBModel.SysRole" Width="1.5" PointX="7.375" PointY="4.625" />
+        <EntityTypeShape EntityType="AppsDBModel.SysUser" Width="1.5" PointX="7.25" PointY="7.875" />
+        <AssociationConnector Association="AppsDBModel.FK_SysModuleOperate_SysModule" />
+        <AssociationConnector Association="AppsDBModel.FK_SysRight_SysModule" />
+        <AssociationConnector Association="AppsDBModel.FK_SysRight_SysRole" />
+        <AssociationConnector Association="AppsDBModel.FK_SysRightOperate_SysRight" />
+        <AssociationConnector Association="AppsDBModel.SysRoleSysUser" />
+        <EntityTypeShape EntityType="AppsDBModel.MIS_Article" Width="1.5" PointX="11.625" PointY="8.625" />
+        <EntityTypeShape EntityType="AppsDBModel.MIS_Article_Category" Width="1.5" PointX="9.375" PointY="5.375" />
+        <AssociationConnector Association="AppsDBModel.FK_MIS_Article_MIS_Article_Category" />
+        <AssociationConnector Association="AppsDBModel.FK_MIS_Article_SysUser" />
+        <AssociationConnector Association="AppsDBModel.FK_MIS_Article_SysUser1" />
+        <AssociationConnector Association="AppsDBModel.FK_MIS_Article_Category_MIS_Article_Category" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
