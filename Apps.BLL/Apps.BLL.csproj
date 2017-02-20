@@ -81,6 +81,7 @@
     <Compile Include="SysRightBLL.cs" />
     <Compile Include="SysRoleBLL.cs" />
     <Compile Include="SysSampleBLL.cs" />
+    <Compile Include="SysStructBLL.cs" />
     <Compile Include="SysUserBLL.cs" />
   </ItemGroup>
   <ItemGroup>

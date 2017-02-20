@@ -139,6 +139,19 @@
           <Property Name="Note" Type="text" />
           <Property Name="CreateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="SysStruct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="Higher" Type="varchar" MaxLength="50" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="SysUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -321,6 +334,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SysStruct_SysStruct">
+          <End Role="SysStruct" Type="Self.SysStruct" Multiplicity="1" />
+          <End Role="SysStruct1" Type="Self.SysStruct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysStruct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysStruct1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="P_Sys_ClearUnusedRightOperate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="P_Sys_DeleteSysRoleSysUserByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="roleId" Type="varchar" Mode="In" />
@@ -363,6 +388,7 @@
           <EntitySet Name="SysRole" EntityType="Self.SysRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysRoleSysUser" EntityType="Self.SysRoleSysUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysSample" EntityType="Self.SysSample" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysStruct" EntityType="Self.SysStruct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysUser" EntityType="Self.SysUser" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_MIS_Article_Category_MIS_Article_Category" Association="Self.FK_MIS_Article_Category_MIS_Article_Category">
             <End Role="MIS_Article_Category" EntitySet="MIS_Article_Category" />
@@ -407,6 +433,10 @@
           <AssociationSet Name="FK_SysRoleSysUser_SysUser" Association="Self.FK_SysRoleSysUser_SysUser">
             <End Role="SysUser" EntitySet="SysUser" />
             <End Role="SysRoleSysUser" EntitySet="SysRoleSysUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysStruct_SysStruct" Association="Self.FK_SysStruct_SysStruct">
+            <End Role="SysStruct" EntitySet="SysStruct" />
+            <End Role="SysStruct1" EntitySet="SysStruct" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -506,6 +536,11 @@
           <AssociationSet Name="FK_MIS_Article_Category_MIS_Article_Category" Association="AppsDBModel.FK_MIS_Article_Category_MIS_Article_Category">
             <End Role="MIS_Article_Category" EntitySet="MIS_Article_Category" />
             <End Role="MIS_Article_Category1" EntitySet="MIS_Article_Category" />
+          </AssociationSet>
+          <EntitySet Name="SysStruct" EntityType="AppsDBModel.SysStruct" />
+          <AssociationSet Name="FK_SysStruct_SysStruct" Association="AppsDBModel.FK_SysStruct_SysStruct">
+            <End Role="SysStruct" EntitySet="SysStruct" />
+            <End Role="SysStruct1" EntitySet="SysStruct" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="SysModule">
@@ -857,6 +892,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SysStruct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="Higher" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SysStruct1" Relationship="AppsDBModel.FK_SysStruct_SysStruct" FromRole="SysStruct" ToRole="SysStruct1" />
+          <NavigationProperty Name="SysStruct2" Relationship="AppsDBModel.FK_SysStruct_SysStruct" FromRole="SysStruct1" ToRole="SysStruct" />
+        </EntityType>
+        <Association Name="FK_SysStruct_SysStruct">
+          <End Type="AppsDBModel.SysStruct" Role="SysStruct" Multiplicity="1" />
+          <End Type="AppsDBModel.SysStruct" Role="SysStruct1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysStruct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysStruct1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1121,6 +1183,20 @@
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysStruct">
+            <EntityTypeMapping TypeName="AppsDBModel.SysStruct">
+              <MappingFragment StoreEntitySet="SysStruct">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Higher" ColumnName="Higher" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

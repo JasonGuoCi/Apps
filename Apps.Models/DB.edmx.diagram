@@ -26,6 +26,8 @@
         <AssociationConnector Association="AppsDBModel.FK_MIS_Article_SysUser" />
         <AssociationConnector Association="AppsDBModel.FK_MIS_Article_SysUser1" />
         <AssociationConnector Association="AppsDBModel.FK_MIS_Article_Category_MIS_Article_Category" />
+        <EntityTypeShape EntityType="AppsDBModel.SysStruct" Width="1.5" PointX="0.75" PointY="9.75" />
+        <AssociationConnector Association="AppsDBModel.FK_SysStruct_SysStruct" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

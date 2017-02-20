@@ -230,6 +230,7 @@
     <Compile Include="Controllers\SysRightController.cs" />
     <Compile Include="Controllers\SysRoleController.cs" />
     <Compile Include="Controllers\SysSampleController.cs" />
+    <Compile Include="Controllers\SysStructController.cs" />
     <Compile Include="Controllers\SysUserController.cs" />
     <Compile Include="Core\CultureAwareHttpModule.cs" />
     <Compile Include="Core\ExtendMvcHtml.cs" />
@@ -937,6 +938,7 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Manage\" />
     <Folder Include="Views\MIS_Article\" />
+    <Folder Include="Views\SysStruct\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -119,6 +119,9 @@
     <Compile Include="SysSample.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SysStruct.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="SysUser.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -134,6 +137,7 @@
     <Compile Include="Sys\SysRightOperateModel.cs" />
     <Compile Include="Sys\SysRoleModel.cs" />
     <Compile Include="Sys\SysSampleModel.cs" />
+    <Compile Include="Sys\SysStructModel.cs" />
     <Compile Include="Sys\SysUserModel.cs" />
   </ItemGroup>
   <ItemGroup>

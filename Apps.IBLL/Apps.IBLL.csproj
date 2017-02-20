@@ -59,6 +59,7 @@
     <Compile Include="ISysRightBLL.cs" />
     <Compile Include="ISysRoleBLL.cs" />
     <Compile Include="ISysSampleBLL.cs" />
+    <Compile Include="ISysStructBLL.cs" />
     <Compile Include="ISysUserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
