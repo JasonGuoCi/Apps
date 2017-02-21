@@ -60,6 +60,10 @@ namespace Apps.Core
             container.RegisterType<IMIS_Article_CategoryBLL, MIS_Article_CategoryBLL>();
             container.RegisterType<IMIS_Article_CategoryRepository, MIS_Article_CategoryRepository>();
 
+
+            container.RegisterType<ISysStructBLL, SysStructBLL>();
+            container.RegisterType<ISysStructRepository, SysStructRepository>();
+
         }
     }
 }
