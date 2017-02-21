@@ -928,6 +928,10 @@
     <Content Include="Scripts\kindeditor\jsp\demo.jsp" />
     <Content Include="Scripts\kindeditor\jsp\file_manager_json.jsp" />
     <Content Include="Scripts\kindeditor\jsp\upload_json.jsp" />
+    <Content Include="Views\SysStruct\Index.cshtml" />
+    <Content Include="Views\SysStruct\Create.cshtml" />
+    <Content Include="Views\SysStruct\Edit.cshtml" />
+    <Content Include="Views\SysStruct\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -938,7 +942,6 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Manage\" />
     <Folder Include="Views\MIS_Article\" />
-    <Folder Include="Views\SysStruct\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
