@@ -29,10 +29,10 @@
         </div>
     </div>
     <div data-options="region:'west',split:true,title:'菜单列表'" style="width: 200px; height:100%; padding-top: 2px; background-color:#fff; overflow:auto">
-        <div id="RightTree" style=" background-color:#fff;">
+        @*<div id="RightTree" style=" background-color:#fff;">
                 <div class="panel-loading">加载中...</div>
-            </div>
-        @*<div id="RightAccordion" class="easyui-accordion"> </div>*@
+            </div>*@
+        <div id="RightAccordion" class="easyui-accordion"> </div>
     </div>
     <div data-options="region:'south',border:false" style="height: 20px;">
         <div class="define-bottom">
@@ -79,7 +79,7 @@
 </body>
 </html>
 
-@*<script>
+<script>
     $(function () {
         jQuery("#RightAccordion").accordion({ //初始化accordion
             fillSpace: true,
@@ -124,4 +124,4 @@
                });
            }, "json");
     });
-</script>*@
+</script>
