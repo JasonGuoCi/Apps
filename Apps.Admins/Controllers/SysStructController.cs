@@ -17,11 +17,33 @@ namespace Apps.Admins.Controllers
         public ISysStructBLL m_BLL { get; set; }
         ValidationErrors errors = new ValidationErrors();
         // GET: SysStruct
+        [SupportFilter]
         public ActionResult Index()
         {
+            //ViewBag.Perm = GetPermission();
             return View();
         }
+        [SupportFilter(ActionName = "Index")]
+       // [SupportFilter]
+        [HttpPost]
+        public JsonResult GetList2()
+        {
 
+            List<SysStructModel> list = m_BLL.GetList();
+            var json = from r in list
+                       select new SysStructModel()
+                       {
+                           Id = r.Id,
+                           Name = r.Name,
+                           ParentId = r.ParentId,
+                           Sort = r.Sort,
+                           Higher = r.Higher,
+                           Enable = r.Enable,
+                           Remark = r.Remark,
+                           CreateTime = r.CreateTime
+                       };
+            return Json(json);
+        }
         [HttpPost]
         public JsonResult GetList(GridPager pager, string queryStr)
         {

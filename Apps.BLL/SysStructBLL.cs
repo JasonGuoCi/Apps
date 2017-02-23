@@ -18,6 +18,33 @@ namespace Apps.BLL
     {
         [Dependency]
         public ISysStructRepository m_Rep { get; set; }
+        public List<SysStructModel> GetList()
+        {
+            IQueryable<SysStruct> queryData = null;
+
+            queryData = m_Rep.GetList(db);
+
+
+            return CreateModelList2(ref queryData);
+        }
+        private List<SysStructModel> CreateModelList2(ref IQueryable<SysStruct> queryData)
+        {
+            //throw new NotImplementedException();
+
+            List<SysStructModel> modelList = (from r in queryData
+                                              select new SysStructModel
+                                              {
+                                                  CreateTime = r.CreateTime,
+                                                  Enable = r.Enable,
+                                                  Higher = r.Higher,
+                                                  Id = r.Id,
+                                                  Name = r.Name,
+                                                  ParentId = r.ParentId,
+                                                  Remark = r.Remark,
+                                                  Sort = r.Sort
+                                              }).ToList();
+            return modelList;
+        }
 
         public List<SysStructModel> GetList(ref GridPager pager, string queryStr)
         {

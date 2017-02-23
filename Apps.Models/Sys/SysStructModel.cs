@@ -10,32 +10,32 @@ namespace Apps.Models.Sys
     public class SysStructModel
     {
         [MaxWordsExpression(50)]
-        [Display(Name = "Id")]
+        [Display(Name = "ID")]
         public string Id { get; set; }
 
         [MaxWordsExpression(50)]
-        [Display(Name = "Name")]
+        [Display(Name = "名称")]
         public string Name { get; set; }
 
         [MaxWordsExpression(50)]
-        [Display(Name = "ParentId")]
+        [Display(Name = "上级ID")]
         public string ParentId { get; set; }
 
-        [Display(Name = "Sort")]
+        [Display(Name = "排序")]
         public int Sort { get; set; }
 
         [MaxWordsExpression(50)]
         [Display(Name = "Higher")]
         public string Higher { get; set; }
 
-        [Display(Name = "Enable")]
+        [Display(Name = "是否启用")]
         public bool Enable { get; set; }
 
         [MaxWordsExpression(500)]
-        [Display(Name = "Remark")]
+        [Display(Name = "说明")]
         public string Remark { get; set; }
 
-        [Display(Name = "CreateTime")]
+        [Display(Name = "创建时间")]
         public DateTime CreateTime { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace Apps.IBLL
 {
     public interface ISysStructBLL
     {
+        List<SysStructModel> GetList();
         List<SysStructModel> GetList(ref GridPager pager, string queryStr);
         bool Create(ref ValidationErrors errors, SysStructModel model);
         bool Delete(ref ValidationErrors errors, string id);
