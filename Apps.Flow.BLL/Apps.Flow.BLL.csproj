@@ -60,6 +60,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Flow_FormAttrBLL.cs" />
     <Compile Include="Flow_FormBLL.cs" />
+    <Compile Include="Flow_FormContentBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -75,6 +75,7 @@
       <DependentUpon>DB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Flow\Flow_FormAttrModel.cs" />
+    <Compile Include="Flow\Flow_FormContentModel.cs" />
     <Compile Include="Flow\Flow_FormModel.cs" />
     <Compile Include="Flow_Form.cs">
       <DependentUpon>DB.tt</DependentUpon>

@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Flow_FormAttrRepository.cs" />
+    <Compile Include="Flow_FormContentRepository.cs" />
     <Compile Include="Flow_FormRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

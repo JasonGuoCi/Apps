@@ -43,6 +43,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="IFlow_FormAttrBLL.cs" />
     <Compile Include="IFlow_FormBLL.cs" />
+    <Compile Include="IFlow_FormContentBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
