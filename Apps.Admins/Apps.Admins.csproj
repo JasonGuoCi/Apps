@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Apps.Admins</RootNamespace>
     <AssemblyName>Apps.Admins</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -96,16 +97,14 @@
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -147,6 +146,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -217,6 +217,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Flow\Controllers\Flow_FormAttrController.cs" />
+    <Compile Include="Areas\Flow\Controllers\Flow_FormController.cs" />
+    <Compile Include="Areas\Flow\FlowAreaRegistration.cs" />
     <Compile Include="Areas\MIS\Controllers\ArticleController.cs" />
     <Compile Include="Areas\MIS\Controllers\CategoryController.cs" />
     <Compile Include="Areas\MIS\MISAreaRegistration.cs" />
@@ -528,6 +531,15 @@
     <Content Include="Areas\MIS\Views\Category\Create.cshtml" />
     <Content Include="Areas\MIS\Views\Category\Edit.cshtml" />
     <Content Include="Areas\MIS\Views\Category\Details.cshtml" />
+    <Content Include="Areas\Flow\Views\web.config" />
+    <Content Include="Areas\Flow\Views\Flow_Form\Index.cshtml" />
+    <Content Include="Areas\Flow\Views\Flow_Form\Create.cshtml" />
+    <Content Include="Areas\Flow\Views\Flow_Form\Edit.cshtml" />
+    <Content Include="Areas\Flow\Views\Flow_Form\Details.cshtml" />
+    <Content Include="Areas\Flow\Views\Flow_FormAttr\Index.cshtml" />
+    <Content Include="Areas\Flow\Views\Flow_FormAttr\Create.cshtml" />
+    <Content Include="Areas\Flow\Views\Flow_FormAttr\Edit.cshtml" />
+    <Content Include="Areas\Flow\Views\Flow_FormAttr\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easyui\easyloader.js" />
     <Content Include="Scripts\easyui\jquery-1.8.0.min.js" />
@@ -935,6 +947,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Flow\Models\" />
+    <Folder Include="Areas\Flow\Views\Shared\" />
     <Folder Include="Areas\MIS\Models\" />
     <Folder Include="Areas\MIS\Views\Shared\" />
     <Folder Include="Scripts\easyui\demo\" />
@@ -967,6 +981,14 @@
     <ProjectReference Include="..\Apps.DAL\Apps.DAL.csproj">
       <Project>{73181e58-b8cf-439c-9181-de42db4fe4ea}</Project>
       <Name>Apps.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Apps.Flow.BLL\Apps.Flow.BLL.csproj">
+      <Project>{16436753-cbef-4739-8bf1-859f59206013}</Project>
+      <Name>Apps.Flow.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Apps.Flow.IBLL\Apps.Flow.IBLL.csproj">
+      <Project>{dc0f96d2-5137-4140-8ae7-bec1c39615aa}</Project>
+      <Name>Apps.Flow.IBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Apps.IBLL\Apps.IBLL.csproj">
       <Project>{7c71993d-7bfb-46f8-a018-47de5b96e1d4}</Project>

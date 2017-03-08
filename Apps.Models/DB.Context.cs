@@ -39,6 +39,15 @@ namespace Apps.Models
         public virtual DbSet<MIS_Article> MIS_Article { get; set; }
         public virtual DbSet<MIS_Article_Category> MIS_Article_Category { get; set; }
         public virtual DbSet<SysStruct> SysStruct { get; set; }
+        public virtual DbSet<Flow_Form> Flow_Form { get; set; }
+        public virtual DbSet<Flow_FormAttr> Flow_FormAttr { get; set; }
+        public virtual DbSet<Flow_FormContent> Flow_FormContent { get; set; }
+        public virtual DbSet<Flow_FormContentStepCheck> Flow_FormContentStepCheck { get; set; }
+        public virtual DbSet<Flow_FormContentStepCheckState> Flow_FormContentStepCheckState { get; set; }
+        public virtual DbSet<Flow_Seal> Flow_Seal { get; set; }
+        public virtual DbSet<Flow_Step> Flow_Step { get; set; }
+        public virtual DbSet<Flow_StepRule> Flow_StepRule { get; set; }
+        public virtual DbSet<Flow_Type> Flow_Type { get; set; }
     
         public virtual ObjectResult<P_Sys_GetRightOperate_Result> P_Sys_GetRightOperate(string userId, string url)
         {

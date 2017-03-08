@@ -20,6 +20,8 @@ namespace Apps.Models
             this.SysRole = new HashSet<SysRole>();
             this.MIS_Article = new HashSet<MIS_Article>();
             this.MIS_Article1 = new HashSet<MIS_Article>();
+            this.Flow_FormContent = new HashSet<Flow_FormContent>();
+            this.Flow_FormContentStepCheckState = new HashSet<Flow_FormContentStepCheckState>();
         }
     
         public string Id { get; set; }
@@ -55,6 +57,11 @@ namespace Apps.Models
         public string JobState { get; set; }
         public string Photo { get; set; }
         public string Attach { get; set; }
+        public string Lead { get; set; }
+        public string LeadName { get; set; }
+        public bool IsSelLead { get; set; }
+        public bool IsReportCalendar { get; set; }
+        public bool IsSecretary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SysRole> SysRole { get; set; }
@@ -62,5 +69,9 @@ namespace Apps.Models
         public virtual ICollection<MIS_Article> MIS_Article { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MIS_Article> MIS_Article1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Flow_FormContent> Flow_FormContent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Flow_FormContentStepCheckState> Flow_FormContentStepCheckState { get; set; }
     }
 }

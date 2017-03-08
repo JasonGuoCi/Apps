@@ -5,6 +5,168 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AppsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Flow_Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="UsingDep" Type="varchar" MaxLength="2000" />
+          <Property Name="TypeId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="HtmlForm" Type="text" />
+          <Property Name="AttrA" Type="varchar" MaxLength="50" />
+          <Property Name="AttrB" Type="varchar" MaxLength="50" />
+          <Property Name="AttrC" Type="varchar" MaxLength="50" />
+          <Property Name="AttrD" Type="varchar" MaxLength="50" />
+          <Property Name="AttrE" Type="varchar" MaxLength="50" />
+          <Property Name="AttrF" Type="varchar" MaxLength="50" />
+          <Property Name="AttrG" Type="varchar" MaxLength="50" />
+          <Property Name="AttrH" Type="varchar" MaxLength="50" />
+          <Property Name="AttrI" Type="varchar" MaxLength="50" />
+          <Property Name="AttrJ" Type="varchar" MaxLength="50" />
+          <Property Name="AttrK" Type="varchar" MaxLength="50" />
+          <Property Name="AttrL" Type="varchar" MaxLength="50" />
+          <Property Name="AttrM" Type="varchar" MaxLength="50" />
+          <Property Name="AttrN" Type="varchar" MaxLength="50" />
+          <Property Name="AttrO" Type="varchar" MaxLength="50" />
+          <Property Name="AttrP" Type="varchar" MaxLength="50" />
+          <Property Name="AttrQ" Type="varchar" MaxLength="50" />
+          <Property Name="AttrR" Type="varchar" MaxLength="50" />
+          <Property Name="AttrS" Type="varchar" MaxLength="50" />
+          <Property Name="AttrT" Type="varchar" MaxLength="50" />
+          <Property Name="AttrU" Type="varchar" MaxLength="50" />
+          <Property Name="AttrV" Type="varchar" MaxLength="50" />
+          <Property Name="AttrW" Type="varchar" MaxLength="50" />
+          <Property Name="AttrX" Type="varchar" MaxLength="50" />
+          <Property Name="AttrY" Type="varchar" MaxLength="50" />
+          <Property Name="AttrZ" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Flow_FormAttr">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AttrType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheckJS" Type="varchar" MaxLength="500" />
+          <Property Name="TypeId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="OptionList" Type="varchar" MaxLength="500" />
+          <Property Name="IsValid" Type="bit" />
+        </EntityType>
+        <EntityType Name="Flow_FormContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FormId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FormLevel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="AttrA" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrB" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrC" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrD" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrE" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrF" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrG" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrH" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrI" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrJ" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrK" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrL" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrM" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrN" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrO" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrP" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrQ" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrR" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrS" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrT" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrU" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrV" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrW" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrX" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrY" Type="varchar" MaxLength="2048" />
+          <Property Name="AttrZ" Type="varchar" MaxLength="2048" />
+          <Property Name="CustomMember" Type="varchar" MaxLength="4000" />
+          <Property Name="TimeOut" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Flow_FormContentStepCheck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="StateFlag" Type="bit" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsEnd" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Flow_FormContentStepCheckState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepCheckId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheckFlag" Type="int" Nullable="false" />
+          <Property Name="Reamrk" Type="varchar" MaxLength="2000" />
+          <Property Name="TheSeal" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Flow_Seal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="200" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Using" Type="varchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="Flow_Step">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="FormId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FlowRule" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsCustom" Type="bit" Nullable="false" />
+          <Property Name="IsAllCheck" Type="bit" Nullable="false" />
+          <Property Name="Execution" Type="varchar" MaxLength="4000" />
+          <Property Name="CompulsoryOver" Type="bit" Nullable="false" />
+          <Property Name="IsEditAttr" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Flow_StepRule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AttrId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Operator" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Result" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NextStep" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Flow_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="MIS_Article">
           <Key>
             <PropertyRef Name="Id" />
@@ -189,7 +351,120 @@
           <Property Name="JobState" Type="varchar" MaxLength="20" />
           <Property Name="Photo" Type="varchar" MaxLength="200" />
           <Property Name="Attach" Type="varchar" MaxLength="200" />
+          <Property Name="Lead" Type="varchar" MaxLength="4000" />
+          <Property Name="LeadName" Type="varchar" MaxLength="4000" />
+          <Property Name="IsSelLead" Type="bit" Nullable="false" />
+          <Property Name="IsReportCalendar" Type="bit" Nullable="false" />
+          <Property Name="IsSecretary" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Flow_Form_Flow_Type">
+          <End Role="Flow_Type" Type="Self.Flow_Type" Multiplicity="1" />
+          <End Role="Flow_Form" Type="Self.Flow_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_Form">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormAttr_Flow_Type">
+          <End Role="Flow_Type" Type="Self.Flow_Type" Multiplicity="1" />
+          <End Role="Flow_FormAttr" Type="Self.Flow_FormAttr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormAttr">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormContent_Flow_Form">
+          <End Role="Flow_Form" Type="Self.Flow_Form" Multiplicity="1" />
+          <End Role="Flow_FormContent" Type="Self.Flow_FormContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContent">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormContent_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="Flow_FormContent" Type="Self.Flow_FormContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck">
+          <End Role="Flow_FormContentStepCheck" Type="Self.Flow_FormContentStepCheck" Multiplicity="1" />
+          <End Role="Flow_FormContentStepCheckState" Type="Self.Flow_FormContentStepCheckState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_FormContentStepCheck">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContentStepCheckState">
+              <PropertyRef Name="StepCheckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormContentStepCheckState_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="Flow_FormContentStepCheckState" Type="Self.Flow_FormContentStepCheckState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContentStepCheckState">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_Step_Flow_Form">
+          <End Role="Flow_Form" Type="Self.Flow_Form" Multiplicity="1" />
+          <End Role="Flow_Step" Type="Self.Flow_Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_Step">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_StepRule_Flow_Step">
+          <End Role="Flow_Step" Type="Self.Flow_Step" Multiplicity="1" />
+          <End Role="Flow_StepRule" Type="Self.Flow_StepRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Step">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_StepRule">
+              <PropertyRef Name="StepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_StepState_Flow_StepState">
+          <End Role="Flow_FormContent" Type="Self.Flow_FormContent" Multiplicity="1" />
+          <End Role="Flow_FormContentStepCheck" Type="Self.Flow_FormContentStepCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_FormContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContentStepCheck">
+              <PropertyRef Name="ContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MIS_Article_Category_MIS_Article_Category">
           <End Role="MIS_Article_Category" Type="Self.MIS_Article_Category" Multiplicity="0..1" />
           <End Role="MIS_Article_Category1" Type="Self.MIS_Article_Category" Multiplicity="*" />
@@ -377,6 +652,15 @@
           <Parameter Name="userId" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="AppsDBModelStoreContainer">
+          <EntitySet Name="Flow_Form" EntityType="Self.Flow_Form" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flow_FormAttr" EntityType="Self.Flow_FormAttr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flow_FormContent" EntityType="Self.Flow_FormContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flow_FormContentStepCheck" EntityType="Self.Flow_FormContentStepCheck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flow_FormContentStepCheckState" EntityType="Self.Flow_FormContentStepCheckState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flow_Seal" EntityType="Self.Flow_Seal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flow_Step" EntityType="Self.Flow_Step" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flow_StepRule" EntityType="Self.Flow_StepRule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flow_Type" EntityType="Self.Flow_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MIS_Article" EntityType="Self.MIS_Article" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MIS_Article_Category" EntityType="Self.MIS_Article_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysException" EntityType="Self.SysException" Schema="dbo" store:Type="Tables" />
@@ -390,6 +674,42 @@
           <EntitySet Name="SysSample" EntityType="Self.SysSample" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysStruct" EntityType="Self.SysStruct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysUser" EntityType="Self.SysUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Flow_Form_Flow_Type" Association="Self.FK_Flow_Form_Flow_Type">
+            <End Role="Flow_Type" EntitySet="Flow_Type" />
+            <End Role="Flow_Form" EntitySet="Flow_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormAttr_Flow_Type" Association="Self.FK_Flow_FormAttr_Flow_Type">
+            <End Role="Flow_Type" EntitySet="Flow_Type" />
+            <End Role="Flow_FormAttr" EntitySet="Flow_FormAttr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormContent_Flow_Form" Association="Self.FK_Flow_FormContent_Flow_Form">
+            <End Role="Flow_Form" EntitySet="Flow_Form" />
+            <End Role="Flow_FormContent" EntitySet="Flow_FormContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormContent_SysUser" Association="Self.FK_Flow_FormContent_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="Flow_FormContent" EntitySet="Flow_FormContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck" Association="Self.FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck">
+            <End Role="Flow_FormContentStepCheck" EntitySet="Flow_FormContentStepCheck" />
+            <End Role="Flow_FormContentStepCheckState" EntitySet="Flow_FormContentStepCheckState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormContentStepCheckState_SysUser" Association="Self.FK_Flow_FormContentStepCheckState_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="Flow_FormContentStepCheckState" EntitySet="Flow_FormContentStepCheckState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_Step_Flow_Form" Association="Self.FK_Flow_Step_Flow_Form">
+            <End Role="Flow_Form" EntitySet="Flow_Form" />
+            <End Role="Flow_Step" EntitySet="Flow_Step" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_StepRule_Flow_Step" Association="Self.FK_Flow_StepRule_Flow_Step">
+            <End Role="Flow_Step" EntitySet="Flow_Step" />
+            <End Role="Flow_StepRule" EntitySet="Flow_StepRule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_StepState_Flow_StepState" Association="Self.FK_Flow_StepState_Flow_StepState">
+            <End Role="Flow_FormContent" EntitySet="Flow_FormContent" />
+            <End Role="Flow_FormContentStepCheck" EntitySet="Flow_FormContentStepCheck" />
+          </AssociationSet>
           <AssociationSet Name="FK_MIS_Article_Category_MIS_Article_Category" Association="Self.FK_MIS_Article_Category_MIS_Article_Category">
             <End Role="MIS_Article_Category" EntitySet="MIS_Article_Category" />
             <End Role="MIS_Article_Category1" EntitySet="MIS_Article_Category" />
@@ -542,6 +862,51 @@
             <End Role="SysStruct" EntitySet="SysStruct" />
             <End Role="SysStruct1" EntitySet="SysStruct" />
           </AssociationSet>
+          <EntitySet Name="Flow_Form" EntityType="AppsDBModel.Flow_Form" />
+          <EntitySet Name="Flow_FormAttr" EntityType="AppsDBModel.Flow_FormAttr" />
+          <EntitySet Name="Flow_FormContent" EntityType="AppsDBModel.Flow_FormContent" />
+          <EntitySet Name="Flow_FormContentStepCheck" EntityType="AppsDBModel.Flow_FormContentStepCheck" />
+          <EntitySet Name="Flow_FormContentStepCheckState" EntityType="AppsDBModel.Flow_FormContentStepCheckState" />
+          <EntitySet Name="Flow_Seal" EntityType="AppsDBModel.Flow_Seal" />
+          <EntitySet Name="Flow_Step" EntityType="AppsDBModel.Flow_Step" />
+          <EntitySet Name="Flow_StepRule" EntityType="AppsDBModel.Flow_StepRule" />
+          <EntitySet Name="Flow_Type" EntityType="AppsDBModel.Flow_Type" />
+          <AssociationSet Name="FK_Flow_Form_Flow_Type" Association="AppsDBModel.FK_Flow_Form_Flow_Type">
+            <End Role="Flow_Type" EntitySet="Flow_Type" />
+            <End Role="Flow_Form" EntitySet="Flow_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormContent_Flow_Form" Association="AppsDBModel.FK_Flow_FormContent_Flow_Form">
+            <End Role="Flow_Form" EntitySet="Flow_Form" />
+            <End Role="Flow_FormContent" EntitySet="Flow_FormContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_Step_Flow_Form" Association="AppsDBModel.FK_Flow_Step_Flow_Form">
+            <End Role="Flow_Form" EntitySet="Flow_Form" />
+            <End Role="Flow_Step" EntitySet="Flow_Step" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormAttr_Flow_Type" Association="AppsDBModel.FK_Flow_FormAttr_Flow_Type">
+            <End Role="Flow_Type" EntitySet="Flow_Type" />
+            <End Role="Flow_FormAttr" EntitySet="Flow_FormAttr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormContent_SysUser" Association="AppsDBModel.FK_Flow_FormContent_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="Flow_FormContent" EntitySet="Flow_FormContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_StepState_Flow_StepState" Association="AppsDBModel.FK_Flow_StepState_Flow_StepState">
+            <End Role="Flow_FormContent" EntitySet="Flow_FormContent" />
+            <End Role="Flow_FormContentStepCheck" EntitySet="Flow_FormContentStepCheck" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck" Association="AppsDBModel.FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck">
+            <End Role="Flow_FormContentStepCheck" EntitySet="Flow_FormContentStepCheck" />
+            <End Role="Flow_FormContentStepCheckState" EntitySet="Flow_FormContentStepCheckState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_FormContentStepCheckState_SysUser" Association="AppsDBModel.FK_Flow_FormContentStepCheckState_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="Flow_FormContentStepCheckState" EntitySet="Flow_FormContentStepCheckState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flow_StepRule_Flow_Step" Association="AppsDBModel.FK_Flow_StepRule_Flow_Step">
+            <End Role="Flow_Step" EntitySet="Flow_Step" />
+            <End Role="Flow_StepRule" EntitySet="Flow_StepRule" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="SysModule">
           <Key>
@@ -688,6 +1053,13 @@
           <NavigationProperty Name="SysRole" Relationship="AppsDBModel.SysRoleSysUser" FromRole="SysUser" ToRole="SysRole" />
           <NavigationProperty Name="MIS_Article" Relationship="AppsDBModel.FK_MIS_Article_SysUser" FromRole="SysUser" ToRole="MIS_Article" />
           <NavigationProperty Name="MIS_Article1" Relationship="AppsDBModel.FK_MIS_Article_SysUser1" FromRole="SysUser" ToRole="MIS_Article" />
+          <Property Name="Lead" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="LeadName" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="IsSelLead" Type="Boolean" Nullable="false" />
+          <Property Name="IsReportCalendar" Type="Boolean" Nullable="false" />
+          <Property Name="IsSecretary" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Flow_FormContent" Relationship="AppsDBModel.FK_Flow_FormContent_SysUser" FromRole="SysUser" ToRole="Flow_FormContent" />
+          <NavigationProperty Name="Flow_FormContentStepCheckState" Relationship="AppsDBModel.FK_Flow_FormContentStepCheckState_SysUser" FromRole="SysUser" ToRole="Flow_FormContentStepCheckState" />
         </EntityType>
         <Association Name="FK_SysModuleOperate_SysModule">
           <End Type="AppsDBModel.SysModule" Role="SysModule" Multiplicity="1">
@@ -919,6 +1291,292 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Flow_Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UsingDep" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="TypeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="HtmlForm" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AttrA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrJ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrQ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrW" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrZ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Flow_Type" Relationship="AppsDBModel.FK_Flow_Form_Flow_Type" FromRole="Flow_Form" ToRole="Flow_Type" />
+          <NavigationProperty Name="Flow_FormContent" Relationship="AppsDBModel.FK_Flow_FormContent_Flow_Form" FromRole="Flow_Form" ToRole="Flow_FormContent" />
+          <NavigationProperty Name="Flow_Step" Relationship="AppsDBModel.FK_Flow_Step_Flow_Form" FromRole="Flow_Form" ToRole="Flow_Step" />
+        </EntityType>
+        <EntityType Name="Flow_FormAttr">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CheckJS" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TypeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="OptionList" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsValid" Type="Boolean" />
+          <NavigationProperty Name="Flow_Type" Relationship="AppsDBModel.FK_Flow_FormAttr_Flow_Type" FromRole="Flow_FormAttr" ToRole="Flow_Type" />
+        </EntityType>
+        <EntityType Name="Flow_FormContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FormId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FormLevel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AttrA" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrB" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrC" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrD" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrE" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrF" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrG" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrH" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrI" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrJ" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrK" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrL" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrM" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrN" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrO" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrP" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrQ" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrR" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrS" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrT" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrU" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrV" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrW" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrX" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrY" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="AttrZ" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="CustomMember" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="TimeOut" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Flow_Form" Relationship="AppsDBModel.FK_Flow_FormContent_Flow_Form" FromRole="Flow_FormContent" ToRole="Flow_Form" />
+          <NavigationProperty Name="SysUser" Relationship="AppsDBModel.FK_Flow_FormContent_SysUser" FromRole="Flow_FormContent" ToRole="SysUser" />
+          <NavigationProperty Name="Flow_FormContentStepCheck" Relationship="AppsDBModel.FK_Flow_StepState_Flow_StepState" FromRole="Flow_FormContent" ToRole="Flow_FormContentStepCheck" />
+        </EntityType>
+        <EntityType Name="Flow_FormContentStepCheck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContentId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StepId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="StateFlag" Type="Boolean" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsEnd" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Flow_FormContent" Relationship="AppsDBModel.FK_Flow_StepState_Flow_StepState" FromRole="Flow_FormContentStepCheck" ToRole="Flow_FormContent" />
+          <NavigationProperty Name="Flow_FormContentStepCheckState" Relationship="AppsDBModel.FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck" FromRole="Flow_FormContentStepCheck" ToRole="Flow_FormContentStepCheckState" />
+        </EntityType>
+        <EntityType Name="Flow_FormContentStepCheckState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StepCheckId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CheckFlag" Type="Int32" Nullable="false" />
+          <Property Name="Reamrk" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="TheSeal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Flow_FormContentStepCheck" Relationship="AppsDBModel.FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck" FromRole="Flow_FormContentStepCheckState" ToRole="Flow_FormContentStepCheck" />
+          <NavigationProperty Name="SysUser" Relationship="AppsDBModel.FK_Flow_FormContentStepCheckState_SysUser" FromRole="Flow_FormContentStepCheckState" ToRole="SysUser" />
+        </EntityType>
+        <EntityType Name="Flow_Seal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Using" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Flow_Step">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="FormId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FlowRule" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsCustom" Type="Boolean" Nullable="false" />
+          <Property Name="IsAllCheck" Type="Boolean" Nullable="false" />
+          <Property Name="Execution" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="CompulsoryOver" Type="Boolean" Nullable="false" />
+          <Property Name="IsEditAttr" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Flow_Form" Relationship="AppsDBModel.FK_Flow_Step_Flow_Form" FromRole="Flow_Step" ToRole="Flow_Form" />
+          <NavigationProperty Name="Flow_StepRule" Relationship="AppsDBModel.FK_Flow_StepRule_Flow_Step" FromRole="Flow_Step" ToRole="Flow_StepRule" />
+        </EntityType>
+        <EntityType Name="Flow_StepRule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StepId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttrId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Operator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Result" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NextStep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Flow_Step" Relationship="AppsDBModel.FK_Flow_StepRule_Flow_Step" FromRole="Flow_StepRule" ToRole="Flow_Step" />
+        </EntityType>
+        <EntityType Name="Flow_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Flow_Form" Relationship="AppsDBModel.FK_Flow_Form_Flow_Type" FromRole="Flow_Type" ToRole="Flow_Form" />
+          <NavigationProperty Name="Flow_FormAttr" Relationship="AppsDBModel.FK_Flow_FormAttr_Flow_Type" FromRole="Flow_Type" ToRole="Flow_FormAttr" />
+        </EntityType>
+        <Association Name="FK_Flow_Form_Flow_Type">
+          <End Type="AppsDBModel.Flow_Type" Role="Flow_Type" Multiplicity="1" />
+          <End Type="AppsDBModel.Flow_Form" Role="Flow_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_Form">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormContent_Flow_Form">
+          <End Type="AppsDBModel.Flow_Form" Role="Flow_Form" Multiplicity="1" />
+          <End Type="AppsDBModel.Flow_FormContent" Role="Flow_FormContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContent">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_Step_Flow_Form">
+          <End Type="AppsDBModel.Flow_Form" Role="Flow_Form" Multiplicity="1" />
+          <End Type="AppsDBModel.Flow_Step" Role="Flow_Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_Step">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormAttr_Flow_Type">
+          <End Type="AppsDBModel.Flow_Type" Role="Flow_Type" Multiplicity="1" />
+          <End Type="AppsDBModel.Flow_FormAttr" Role="Flow_FormAttr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormAttr">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormContent_SysUser">
+          <End Type="AppsDBModel.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="AppsDBModel.Flow_FormContent" Role="Flow_FormContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_StepState_Flow_StepState">
+          <End Type="AppsDBModel.Flow_FormContent" Role="Flow_FormContent" Multiplicity="1" />
+          <End Type="AppsDBModel.Flow_FormContentStepCheck" Role="Flow_FormContentStepCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_FormContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContentStepCheck">
+              <PropertyRef Name="ContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck">
+          <End Type="AppsDBModel.Flow_FormContentStepCheck" Role="Flow_FormContentStepCheck" Multiplicity="1" />
+          <End Type="AppsDBModel.Flow_FormContentStepCheckState" Role="Flow_FormContentStepCheckState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_FormContentStepCheck">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContentStepCheckState">
+              <PropertyRef Name="StepCheckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_FormContentStepCheckState_SysUser">
+          <End Type="AppsDBModel.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="AppsDBModel.Flow_FormContentStepCheckState" Role="Flow_FormContentStepCheckState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_FormContentStepCheckState">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flow_StepRule_Flow_Step">
+          <End Type="AppsDBModel.Flow_Step" Role="Flow_Step" Multiplicity="1" />
+          <End Type="AppsDBModel.Flow_StepRule" Role="Flow_StepRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flow_Step">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flow_StepRule">
+              <PropertyRef Name="StepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1030,6 +1688,11 @@
           <EntitySetMapping Name="SysUser">
             <EntityTypeMapping TypeName="AppsDBModel.SysUser">
               <MappingFragment StoreEntitySet="SysUser">
+                <ScalarProperty Name="IsSecretary" ColumnName="IsSecretary" />
+                <ScalarProperty Name="IsReportCalendar" ColumnName="IsReportCalendar" />
+                <ScalarProperty Name="IsSelLead" ColumnName="IsSelLead" />
+                <ScalarProperty Name="LeadName" ColumnName="LeadName" />
+                <ScalarProperty Name="Lead" ColumnName="Lead" />
                 <ScalarProperty Name="Attach" ColumnName="Attach" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="JobState" ColumnName="JobState" />
@@ -1196,6 +1859,177 @@
                 <ScalarProperty Name="Higher" ColumnName="Higher" />
                 <ScalarProperty Name="Sort" ColumnName="Sort" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flow_Form">
+            <EntityTypeMapping TypeName="AppsDBModel.Flow_Form">
+              <MappingFragment StoreEntitySet="Flow_Form">
+                <ScalarProperty Name="AttrZ" ColumnName="AttrZ" />
+                <ScalarProperty Name="AttrY" ColumnName="AttrY" />
+                <ScalarProperty Name="AttrX" ColumnName="AttrX" />
+                <ScalarProperty Name="AttrW" ColumnName="AttrW" />
+                <ScalarProperty Name="AttrV" ColumnName="AttrV" />
+                <ScalarProperty Name="AttrU" ColumnName="AttrU" />
+                <ScalarProperty Name="AttrT" ColumnName="AttrT" />
+                <ScalarProperty Name="AttrS" ColumnName="AttrS" />
+                <ScalarProperty Name="AttrR" ColumnName="AttrR" />
+                <ScalarProperty Name="AttrQ" ColumnName="AttrQ" />
+                <ScalarProperty Name="AttrP" ColumnName="AttrP" />
+                <ScalarProperty Name="AttrO" ColumnName="AttrO" />
+                <ScalarProperty Name="AttrN" ColumnName="AttrN" />
+                <ScalarProperty Name="AttrM" ColumnName="AttrM" />
+                <ScalarProperty Name="AttrL" ColumnName="AttrL" />
+                <ScalarProperty Name="AttrK" ColumnName="AttrK" />
+                <ScalarProperty Name="AttrJ" ColumnName="AttrJ" />
+                <ScalarProperty Name="AttrI" ColumnName="AttrI" />
+                <ScalarProperty Name="AttrH" ColumnName="AttrH" />
+                <ScalarProperty Name="AttrG" ColumnName="AttrG" />
+                <ScalarProperty Name="AttrF" ColumnName="AttrF" />
+                <ScalarProperty Name="AttrE" ColumnName="AttrE" />
+                <ScalarProperty Name="AttrD" ColumnName="AttrD" />
+                <ScalarProperty Name="AttrC" ColumnName="AttrC" />
+                <ScalarProperty Name="AttrB" ColumnName="AttrB" />
+                <ScalarProperty Name="AttrA" ColumnName="AttrA" />
+                <ScalarProperty Name="HtmlForm" ColumnName="HtmlForm" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="UsingDep" ColumnName="UsingDep" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flow_FormAttr">
+            <EntityTypeMapping TypeName="AppsDBModel.Flow_FormAttr">
+              <MappingFragment StoreEntitySet="Flow_FormAttr">
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="OptionList" ColumnName="OptionList" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="CheckJS" ColumnName="CheckJS" />
+                <ScalarProperty Name="AttrType" ColumnName="AttrType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flow_FormContent">
+            <EntityTypeMapping TypeName="AppsDBModel.Flow_FormContent">
+              <MappingFragment StoreEntitySet="Flow_FormContent">
+                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+                <ScalarProperty Name="CustomMember" ColumnName="CustomMember" />
+                <ScalarProperty Name="AttrZ" ColumnName="AttrZ" />
+                <ScalarProperty Name="AttrY" ColumnName="AttrY" />
+                <ScalarProperty Name="AttrX" ColumnName="AttrX" />
+                <ScalarProperty Name="AttrW" ColumnName="AttrW" />
+                <ScalarProperty Name="AttrV" ColumnName="AttrV" />
+                <ScalarProperty Name="AttrU" ColumnName="AttrU" />
+                <ScalarProperty Name="AttrT" ColumnName="AttrT" />
+                <ScalarProperty Name="AttrS" ColumnName="AttrS" />
+                <ScalarProperty Name="AttrR" ColumnName="AttrR" />
+                <ScalarProperty Name="AttrQ" ColumnName="AttrQ" />
+                <ScalarProperty Name="AttrP" ColumnName="AttrP" />
+                <ScalarProperty Name="AttrO" ColumnName="AttrO" />
+                <ScalarProperty Name="AttrN" ColumnName="AttrN" />
+                <ScalarProperty Name="AttrM" ColumnName="AttrM" />
+                <ScalarProperty Name="AttrL" ColumnName="AttrL" />
+                <ScalarProperty Name="AttrK" ColumnName="AttrK" />
+                <ScalarProperty Name="AttrJ" ColumnName="AttrJ" />
+                <ScalarProperty Name="AttrI" ColumnName="AttrI" />
+                <ScalarProperty Name="AttrH" ColumnName="AttrH" />
+                <ScalarProperty Name="AttrG" ColumnName="AttrG" />
+                <ScalarProperty Name="AttrF" ColumnName="AttrF" />
+                <ScalarProperty Name="AttrE" ColumnName="AttrE" />
+                <ScalarProperty Name="AttrD" ColumnName="AttrD" />
+                <ScalarProperty Name="AttrC" ColumnName="AttrC" />
+                <ScalarProperty Name="AttrB" ColumnName="AttrB" />
+                <ScalarProperty Name="AttrA" ColumnName="AttrA" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="FormLevel" ColumnName="FormLevel" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flow_FormContentStepCheck">
+            <EntityTypeMapping TypeName="AppsDBModel.Flow_FormContentStepCheck">
+              <MappingFragment StoreEntitySet="Flow_FormContentStepCheck">
+                <ScalarProperty Name="IsEnd" ColumnName="IsEnd" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StateFlag" ColumnName="StateFlag" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="StepId" ColumnName="StepId" />
+                <ScalarProperty Name="ContentId" ColumnName="ContentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flow_FormContentStepCheckState">
+            <EntityTypeMapping TypeName="AppsDBModel.Flow_FormContentStepCheckState">
+              <MappingFragment StoreEntitySet="Flow_FormContentStepCheckState">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="TheSeal" ColumnName="TheSeal" />
+                <ScalarProperty Name="Reamrk" ColumnName="Reamrk" />
+                <ScalarProperty Name="CheckFlag" ColumnName="CheckFlag" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="StepCheckId" ColumnName="StepCheckId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flow_Seal">
+            <EntityTypeMapping TypeName="AppsDBModel.Flow_Seal">
+              <MappingFragment StoreEntitySet="Flow_Seal">
+                <ScalarProperty Name="Using" ColumnName="Using" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flow_Step">
+            <EntityTypeMapping TypeName="AppsDBModel.Flow_Step">
+              <MappingFragment StoreEntitySet="Flow_Step">
+                <ScalarProperty Name="IsEditAttr" ColumnName="IsEditAttr" />
+                <ScalarProperty Name="CompulsoryOver" ColumnName="CompulsoryOver" />
+                <ScalarProperty Name="Execution" ColumnName="Execution" />
+                <ScalarProperty Name="IsAllCheck" ColumnName="IsAllCheck" />
+                <ScalarProperty Name="IsCustom" ColumnName="IsCustom" />
+                <ScalarProperty Name="FlowRule" ColumnName="FlowRule" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flow_StepRule">
+            <EntityTypeMapping TypeName="AppsDBModel.Flow_StepRule">
+              <MappingFragment StoreEntitySet="Flow_StepRule">
+                <ScalarProperty Name="NextStep" ColumnName="NextStep" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="AttrId" ColumnName="AttrId" />
+                <ScalarProperty Name="StepId" ColumnName="StepId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flow_Type">
+            <EntityTypeMapping TypeName="AppsDBModel.Flow_Type">
+              <MappingFragment StoreEntitySet="Flow_Type">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

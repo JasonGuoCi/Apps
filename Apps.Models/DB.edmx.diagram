@@ -28,6 +28,24 @@
         <AssociationConnector Association="AppsDBModel.FK_MIS_Article_Category_MIS_Article_Category" />
         <EntityTypeShape EntityType="AppsDBModel.SysStruct" Width="1.5" PointX="0.75" PointY="9.75" />
         <AssociationConnector Association="AppsDBModel.FK_SysStruct_SysStruct" />
+        <EntityTypeShape EntityType="AppsDBModel.Flow_Form" Width="1.5" PointX="7.25" PointY="18.375" />
+        <EntityTypeShape EntityType="AppsDBModel.Flow_FormAttr" Width="1.5" PointX="7.25" PointY="27.875" />
+        <EntityTypeShape EntityType="AppsDBModel.Flow_FormContent" Width="1.5" PointX="9.5" PointY="13.375" />
+        <EntityTypeShape EntityType="AppsDBModel.Flow_FormContentStepCheck" Width="1.5" PointX="11.75" PointY="16" />
+        <EntityTypeShape EntityType="AppsDBModel.Flow_FormContentStepCheckState" Width="1.5" PointX="14" PointY="12" />
+        <EntityTypeShape EntityType="AppsDBModel.Flow_Seal" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AppsDBModel.Flow_Step" Width="1.5" PointX="9.5" PointY="22.625" />
+        <EntityTypeShape EntityType="AppsDBModel.Flow_StepRule" Width="1.5" PointX="11.75" PointY="23.25" />
+        <EntityTypeShape EntityType="AppsDBModel.Flow_Type" Width="1.5" PointX="5" PointY="21.25" />
+        <AssociationConnector Association="AppsDBModel.FK_Flow_Form_Flow_Type" />
+        <AssociationConnector Association="AppsDBModel.FK_Flow_FormContent_Flow_Form" />
+        <AssociationConnector Association="AppsDBModel.FK_Flow_Step_Flow_Form" />
+        <AssociationConnector Association="AppsDBModel.FK_Flow_FormAttr_Flow_Type" />
+        <AssociationConnector Association="AppsDBModel.FK_Flow_FormContent_SysUser" />
+        <AssociationConnector Association="AppsDBModel.FK_Flow_StepState_Flow_StepState" />
+        <AssociationConnector Association="AppsDBModel.FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck" />
+        <AssociationConnector Association="AppsDBModel.FK_Flow_FormContentStepCheckState_SysUser" />
+        <AssociationConnector Association="AppsDBModel.FK_Flow_StepRule_Flow_Step" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
