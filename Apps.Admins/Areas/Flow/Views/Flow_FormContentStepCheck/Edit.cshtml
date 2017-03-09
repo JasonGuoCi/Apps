@@ -1,0 +1,110 @@
+﻿@model Apps.Models.Flow.Flow_FormContentStepCheckModel
+@using Apps.Common;
+@using Apps.Models.Flow;
+@using Apps.Admins.Core；
+@using Apps.Models.Sys;
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<permModel> perm = (List<permModel>)ViewBag.Perm;
+    if (perm == null)
+    {
+        perm = new List<permModel>();
+    }
+}
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").click(function () {
+            if ($("form").valid()) {
+                $.ajax({
+                    url: "@Url.Action("Edit")",
+                    type: "Post",
+                    data: $("form").serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.type == 1) {
+                            window.parent.frameReturnByMes(data.message);
+                            window.parent.frameReturnByReload(true);
+                            window.parent.frameReturnByClose()
+                        }
+                        else {
+                            window.parent.frameReturnByMes(data.message);
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose();
+        });
+    });
+</script>
+<div class="mvctool bgb">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CreateTime)
+    <table class="fromEditTable setTextWidth300">
+        <tbody>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.ContentId)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.ContentId)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.ContentId)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.StepId)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.StepId)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.StepId)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.State)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.State)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.State)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.StateFlag)：
+                </td>
+                <td style="width:310px">
+                    @Html.CheckBoxFor(model => model.StateFlag)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.StateFlag)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.CreateTime)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.CreateTime)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.CreateTime)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.IsEnd)：
+                </td>
+                <td style="width:310px">
+                    @Html.CheckBoxFor(model => model.IsEnd)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.IsEnd)</td>
+            </tr>
+        </tbody>
+    </table>
+}

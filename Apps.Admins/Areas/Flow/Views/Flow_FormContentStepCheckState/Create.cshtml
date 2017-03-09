@@ -1,0 +1,102 @@
+﻿@model Apps.Models.Flow.Flow_FormContentStepCheckStateModel
+@using Apps.Common;
+@using Apps.Models.Flow;
+@using Apps.Admins.Core;
+@using Apps.Models.Sys;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<permModel> perm = (List<permModel>)ViewBag.Perm;
+    if (perm == null)
+    {
+        perm = new List<permModel>();
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").click(function () {
+            if ($("form").valid()) {
+                $.ajax({
+                    url: "@Url.Action("Create")",
+                    type: "Post",
+                    data: $("form").serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.type == 1) {
+                            window.parent.frameReturnByMes(data.message);
+                            window.parent.frameReturnByReload(true);
+                            window.parent.frameReturnByClose()
+                        }
+                        else {
+                            window.parent.frameReturnByMes(data.message);
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose();
+        });
+    });
+</script>
+<div class="mvctool bgb">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    <input id="CreateTime" type="hidden" name="CreateTime" value="2000-1-1" />
+    <table class="fromEditTable setTextWidth300">
+        <tbody>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.StepCheckId)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.StepCheckId)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.StepCheckId)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.UserId)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.UserId)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.UserId)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.CheckFlag)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.CheckFlag)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.CheckFlag)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Reamrk)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Reamrk)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Reamrk)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.TheSeal)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.TheSeal)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.TheSeal)</td>
+            </tr>
+        </tbody>
+    </table>
+}

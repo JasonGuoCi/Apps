@@ -52,7 +52,13 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Flow_FormAttrRepository.cs" />
     <Compile Include="Flow_FormContentRepository.cs" />
+    <Compile Include="Flow_FormContentStepCheckRepository.cs" />
+    <Compile Include="Flow_FormContentStepCheckStateRepository.cs" />
     <Compile Include="Flow_FormRepository.cs" />
+    <Compile Include="Flow_SealRepository.cs" />
+    <Compile Include="Flow_StepRepository.cs" />
+    <Compile Include="Flow_StepRuleRepository.cs" />
+    <Compile Include="Flow_TypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

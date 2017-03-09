@@ -1,0 +1,100 @@
+﻿@model Apps.Models.Flow.Flow_StepRuleModel
+@using Apps.Common;
+@using Apps.Models.Sys;
+@using Apps.Admins.Core;
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<permModel> perm = (List<permModel>)ViewBag.Perm;
+    if (perm == null)
+    {
+        perm = new List<permModel>();
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").click(function () {
+            if ($("form").valid()) {
+                $.ajax({
+                    url: "@Url.Action("Edit")",
+                    type: "Post",
+                    data: $("form").serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.type == 1) {
+                            window.parent.frameReturnByMes(data.message);
+                            window.parent.frameReturnByReload(true);
+                            window.parent.frameReturnByClose()
+                        }
+                        else {
+                            window.parent.frameReturnByMes(data.message);
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose();
+        });
+    });
+</script>
+<div class="mvctool bgb">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    <table class="fromEditTable setTextWidth300">
+        <tbody>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.StepId)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.StepId)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.StepId)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.AttrId)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.AttrId)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.AttrId)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Operator)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Operator)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Operator)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Result)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Result)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Result)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.NextStep)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.NextStep)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.NextStep)</td>
+            </tr>
+        </tbody>
+    </table>
+}
+

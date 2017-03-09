@@ -43,7 +43,13 @@
     <Compile Include="Class1.cs" />
     <Compile Include="IFlow_FormAttrRepository.cs" />
     <Compile Include="IFlow_FormContentRepository.cs" />
+    <Compile Include="IFlow_FormContentStepCheckRepository.cs" />
+    <Compile Include="IFlow_FormContentStepCheckStateRepository.cs" />
     <Compile Include="IFlow_FormRepository.cs" />
+    <Compile Include="IFlow_SealRepository.cs" />
+    <Compile Include="IFlow_StepRepository.cs" />
+    <Compile Include="IFlow_StepRuleRepository.cs" />
+    <Compile Include="IFlow_TypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

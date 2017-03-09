@@ -76,7 +76,13 @@
     </Compile>
     <Compile Include="Flow\Flow_FormAttrModel.cs" />
     <Compile Include="Flow\Flow_FormContentModel.cs" />
+    <Compile Include="Flow\Flow_FormContentStepCheckModel.cs" />
+    <Compile Include="Flow\Flow_FormContentStepCheckStateModel.cs" />
     <Compile Include="Flow\Flow_FormModel.cs" />
+    <Compile Include="Flow\Flow_SealModel.cs" />
+    <Compile Include="Flow\Flow_StepModel.cs" />
+    <Compile Include="Flow\Flow_StepRuleModel.cs" />
+    <Compile Include="Flow\Flow_TypeModel.cs" />
     <Compile Include="Flow_Form.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>

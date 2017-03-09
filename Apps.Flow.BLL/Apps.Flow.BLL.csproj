@@ -61,6 +61,12 @@
     <Compile Include="Flow_FormAttrBLL.cs" />
     <Compile Include="Flow_FormBLL.cs" />
     <Compile Include="Flow_FormContentBLL.cs" />
+    <Compile Include="Flow_FormContentStepCheckBLL.cs" />
+    <Compile Include="Flow_FormContentStepCheckStateBLL.cs" />
+    <Compile Include="Flow_SealBLL.cs" />
+    <Compile Include="Flow_StepBLL.cs" />
+    <Compile Include="Flow_StepRuleBLL.cs" />
+    <Compile Include="Flow_TypeBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,68 @@
+﻿@model Apps.Models.Flow.Flow_TypeModel
+@using Apps.Common;
+@using Apps.Models.Sys;
+@using Apps.Admins.Core;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+
+}
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose();
+        });
+    });
+</script>
+<div class="mvctool bgb">
+    @*@Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)*@
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CreateTime)
+    <table class="fromEditTable setTextWidth300">
+        <tbody>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Name)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Name)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Remark)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Remark)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Remark)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.CreateTime)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.CreateTime)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.CreateTime)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Sort)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Sort)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Sort)</td>
+            </tr>
+        </tbody>
+    </table>
+}
+

@@ -1,0 +1,110 @@
+﻿@using Apps.Admins.Core;
+@using Apps.Common;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index_Layout.cshtml";
+}
+
+<div class="mvctool">
+    <input id="txtQuery" type="text" class="searchText" />
+    @Html.ToolButton("btnQuery", "icon-search", "查询", true)
+    @Html.ToolButton("btnCreate", "icon-add", "新增", true)
+    @Html.ToolButton("btnEdit", "icon-edit", "编辑", true)
+    @Html.ToolButton("btnDetails", "icon-details", "详细", true)
+    @Html.ToolButton("btnDelete", "icon-remove", "删除", true)
+</div>
+<table id="List"></table>
+
+<div id="modalwindow" class="easyui-window" data-options="modal:true,closed:true,minimizable:false,shadow:false"></div>
+@Html.Partial("~/Views/Shared/_Partial_AutoGrid.cshtml")
+<script type="text/javascript">
+    $(function () {
+        $('#List').datagrid({
+            url: '@Url.Action("GetList")',
+            width: $(window).width() - 10,
+            methord: 'post',
+            height: $(window).height() - 35,
+            fitColumns: true,
+            sortName: 'CreateTime',
+            sortOrder: 'desc',
+            idField: 'Id',
+            pageSize: 15,
+            pageList: [15, 20, 30, 40, 50],
+            pagination: true,
+            striped: true, //奇偶行是否区分
+            singleSelect: true,//单选模式
+            //rownumbers: true,//行号
+            columns: [[
+                { field: 'Id', title: '', width: 80, hidden: true },
+                { field: 'StepCheckId', title: '', width: 80, sortable: true },
+                { field: 'UserId', title: '', width: 80, sortable: true },
+                { field: 'CheckFlag', title: '1通过0不通过2审核中', width: 80, sortable: true },
+                { field: 'Reamrk', title: '', width: 80, sortable: true },
+                { field: 'TheSeal', title: '', width: 80, sortable: true },
+                { field: 'CreateTime', title: '', width: 80, sortable: true }
+            ]]
+        });
+    });
+    //ifram 返回
+    function frameReturnByClose() {
+        $("#modalwindow").window('close');
+    }
+    function frameReturnByReload(flag) {
+        if (flag)
+            $("#List").datagrid('load');
+        else
+            $("#List").datagrid('reload');
+    }
+    function frameReturnByMes(mes) {
+        $.messageBox5s('提示', mes);
+    }
+    $(function () {
+        $("#btnExport").click(function () {
+            $("#modalwindow").html("<iframe width='100%' height='98%' scrolling='no' frameborder='0'' src='/SysHelper/ReportControl'></iframe>");
+            $("#modalwindow").window({ title: '导出', width: 320, height: 200, iconCls: 'icon-add' }).window('open');
+        });
+        $("#btnCreate").click(function () {
+            $("#modalwindow").html("<iframe width='100%' height='98%' scrolling='no' frameborder='0'' src='/Flow_FormContentStepCheckState/Create'></iframe>");
+            $("#modalwindow").window({ title: '新增', width: 700, height: 400, iconCls: 'icon-add' }).window('open');
+        });
+        $("#btnEdit").click(function () {
+            var row = $('#List').datagrid('getSelected');
+            if (row != null) {
+                $("#modalwindow").html("<iframe width='100%' height='99%'  frameborder='0' src='/Flow_FormContentStepCheckState/Edit?id=" + row.Id + "&Ieguid=" + GetGuid() + "'></iframe>");
+                $("#modalwindow").window({ title: '编辑', width: 700, height: 430, iconCls: 'icon-edit' }).window('open');
+            } else { $.messageBox5s('提示', '@Suggestion.PlaseChooseToOperatingRecords'); }
+        });
+        $("#btnDetails").click(function () {
+            var row = $('#List').datagrid('getSelected');
+            if (row != null) {
+                $("#modalwindow").html("<iframe width='100%' height='98%' scrolling='no' frameborder='0' src='/Flow_FormContentStepCheckState/Details?id=" + row.Id + "&Ieguid=" + GetGuid() + "'></iframe>");
+                $("#modalwindow").window({ title: '详细', width: 500, height: 300, iconCls: 'icon-details' }).window('open');
+            } else { $.messageBox5s('提示', '@Suggestion.PlaseChooseToOperatingRecords'); }
+        });
+        $("#btnQuery").click(function () {
+            var queryStr = $("#txtQuery").val();
+            if (queryStr == null) {
+                queryStr = "%";
+            }
+            $('#List').datagrid({
+                url: '@Url.Action("GetList")?queryStr=' + encodeURI(queryStr)
+            });
+
+        });
+        $("#btnDelete").click(function () {
+            var row = $('#List').datagrid('getSelected');
+            if (row != null) {
+                $.messager.confirm('提示', '@Suggestion.YouWantToDeleteTheSelectedRecords', function (r) {
+                    if (r) {
+                        $.post("@Url.Action("Delete")?id=" + row.Id, function (data) {
+                            if (data.type == 1)
+                                $("#List").datagrid('load');
+                            $.messageBox5s('提示', data.message);
+                        }, "json");
+
+                    }
+                });
+            } else { $.messageBox5s('提示', '@Suggestion.PlaseChooseToOperatingRecords'); }
+        });
+    });
+</script>

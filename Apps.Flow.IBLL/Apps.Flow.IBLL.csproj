@@ -44,6 +44,12 @@
     <Compile Include="IFlow_FormAttrBLL.cs" />
     <Compile Include="IFlow_FormBLL.cs" />
     <Compile Include="IFlow_FormContentBLL.cs" />
+    <Compile Include="IFlow_FormContentStepCheckBLL.cs" />
+    <Compile Include="IFlow_FormContentStepCheckStateBLL.cs" />
+    <Compile Include="IFlow_SealBLL.cs" />
+    <Compile Include="IFlow_StepBLL.cs" />
+    <Compile Include="IFlow_StepRuleBLL.cs" />
+    <Compile Include="IFlow_TypeBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
