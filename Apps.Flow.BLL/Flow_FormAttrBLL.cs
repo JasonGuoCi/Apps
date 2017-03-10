@@ -46,7 +46,8 @@ namespace Apps.Flow.BLL
                                                       CheckJS = r.CheckJS,
                                                       CreateTime = r.CreateTime,
                                                       Id = r.Id,
-                                                      IsValid = (bool)r.IsValid,
+                                                      IsValid = (r.IsValid == null ? false :
+                                                      (bool)r.IsValid),
                                                       Name = r.Name,
                                                       OptionList = r.OptionList,
                                                       Title = r.Title,
@@ -199,7 +200,7 @@ namespace Apps.Flow.BLL
                 model.CheckJS = entity.CheckJS;
                 model.CreateTime = entity.CreateTime;
                 model.Id = entity.Id;
-                model.IsValid = (bool)entity.IsValid;
+                model.IsValid = entity.IsValid == null ? false : (bool)entity.IsValid;
                 model.Name = entity.Name;
                 model.OptionList = entity.OptionList;
                 model.Title = entity.Title;
