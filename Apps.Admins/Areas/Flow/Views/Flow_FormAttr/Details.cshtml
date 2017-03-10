@@ -100,7 +100,7 @@
                     @Html.LabelFor(model => model.IsValid)：
                 </td>
                 <td style="width:310px">
-                    @Html.CheckBoxFor(model => (bool)model.IsValid)
+                    @Html.CheckBoxFor(model => model.IsValid)
                 </td>
                 <td>@Html.ValidationMessageFor(model => model.IsValid)</td>
             </tr>

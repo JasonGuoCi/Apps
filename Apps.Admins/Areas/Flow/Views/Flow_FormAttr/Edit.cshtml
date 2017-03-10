@@ -70,23 +70,46 @@
                 </td>
                 <td>@Html.ValidationMessageFor(model => model.Name)</td>
             </tr>
+            @*<tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrType)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrType)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrType)</td>
+                </tr>*@
             <tr>
-                <td style="width:100px; text-align:right;">
+                <td style="width: 100px; text-align: right;">
                     @Html.LabelFor(model => model.AttrType)：
                 </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrType)
+                <td style="width: 310px">
+                    <select id="AttrType" name="AttrType">
+                        <option value='文本'>文本</option>
+                        <option value='多行文本'>多行文本</option>
+                        <option value='日期'>日期</option>
+                        <option value='数字'>数字</option>
+                    </select>
                 </td>
                 <td>@Html.ValidationMessageFor(model => model.AttrType)</td>
             </tr>
+            @*<tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.CheckJS)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.CheckJS)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.CheckJS)</td>
+                </tr>*@
             <tr>
-                <td style="width:100px; text-align:right;">
+                <td style="width: 100px; text-align: right;">
                     @Html.LabelFor(model => model.CheckJS)：
                 </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.CheckJS)
+                <td style="width: 310px" colspan="2">
+                    @Html.TextAreaFor(model => model.CheckJS, 10, 80, new { @style = "width:500px;" })
                 </td>
-                <td>@Html.ValidationMessageFor(model => model.CheckJS)</td>
+
             </tr>
             <tr>
                 <td style="width:100px; text-align:right;">
@@ -97,6 +120,16 @@
                 </td>
                 <td>@Html.ValidationMessageFor(model => model.TypeId)</td>
             </tr>
+
+            @*<tr>
+                    <td style="width: 100px; text-align: right;">
+                        @Html.LabelFor(model => model.TypeId)：
+                    </td>
+                    <td style="width: 310px">
+                        @Html.DropDownListFor(model => model.TypeId, ViewBag.FlowType as SelectList)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.TypeId)</td>
+                </tr>*@
             <tr>
                 <td style="width:100px; text-align:right;">
                     @Html.LabelFor(model => model.CreateTime)：
@@ -120,7 +153,7 @@
                     @Html.LabelFor(model => model.IsValid)：
                 </td>
                 <td style="width:310px">
-                    @Html.CheckBoxFor(model => (bool)model.IsValid)
+                    @Html.CheckBoxFor(model => model.IsValid)
                 </td>
                 <td>@Html.ValidationMessageFor(model => model.IsValid)</td>
             </tr>

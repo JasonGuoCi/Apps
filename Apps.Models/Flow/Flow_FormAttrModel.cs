@@ -42,6 +42,6 @@ namespace Apps.Models.Flow
         public string OptionList { get; set; }
 
         [Display(Name = "是否必填")]
-        public bool? IsValid { get; set; }
+        public bool IsValid { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace Apps.Admins.Areas.Flow
             context.MapRoute(
               "FlowGlobalization", // 路由名称
               "{lang}/Flow/{controller}/{action}/{id}", // 带有参数的 URL
+              //"Flow/{controller}/{action}/{id}", // 带有参数的 URL
               new { lang = "zh", controller = "Home", action = "Index", id = UrlParameter.Optional }, // 参数默认值
               new { lang = "^[a-zA-Z]{2}(-[a-zA-Z]{2})?$" }    //参数约束
           );

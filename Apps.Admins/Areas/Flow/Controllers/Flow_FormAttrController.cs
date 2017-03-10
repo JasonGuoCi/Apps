@@ -16,6 +16,9 @@ namespace Apps.Admins.Areas.Flow.Controllers
         [Dependency]
         public IFlow_FormAttrBLL m_BLL { get; set; }
         ValidationErrors errors = new ValidationErrors();
+
+        [Dependency]
+        public IFlow_TypeBLL t_BLL { get; set; }
         // GET: Flow/Flow_FormAttr
         public ActionResult Index()
         {
@@ -55,6 +58,7 @@ namespace Apps.Admins.Areas.Flow.Controllers
         public ActionResult Create()
         {
             ViewBag.Perm = GetPermission();
+            //ViewBag.FlowType = new SelectList(t_BLL.GetList(ref pager, ""), "Id", "Name");
             return View();
         }
 

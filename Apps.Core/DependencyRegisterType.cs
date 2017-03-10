@@ -1,5 +1,9 @@
 ﻿using Apps.BLL;
 using Apps.DAL;
+using Apps.Flow.BLL;
+using Apps.Flow.DAL;
+using Apps.Flow.IBLL;
+using Apps.Flow.IDAL;
 using Apps.IBLL;
 using Apps.IDAL;
 using Apps.MIS.BLL;
@@ -64,6 +68,32 @@ namespace Apps.Core
             container.RegisterType<ISysStructBLL, SysStructBLL>();
             container.RegisterType<ISysStructRepository, SysStructRepository>();
 
+            container.RegisterType<IFlow_TypeBLL, Flow_TypeBLL>();
+            container.RegisterType<IFlow_TypeRepository, Flow_TypeRepository>();
+
+            container.RegisterType<IFlow_StepRuleBLL, Flow_StepRuleBLL>();
+            container.RegisterType<IFlow_StepRuleRepository, Flow_StepRuleRepository>();
+
+            container.RegisterType<IFlow_StepBLL, Flow_StepBLL>();
+            container.RegisterType<IFlow_StepRepository, Flow_StepRepository>();
+
+            container.RegisterType<IFlow_SealBLL, Flow_SealBLL>();
+            container.RegisterType<IFlow_SealRepository, Flow_SealRepository>();
+
+            container.RegisterType<IFlow_FormContentStepCheckStateBLL, Flow_FormContentStepCheckStateBLL>();
+            container.RegisterType<IFlow_FormContentStepCheckStateRepository, Flow_FormContentStepCheckStateRepository>();
+
+            container.RegisterType<IFlow_FormContentStepCheckBLL, Flow_FormContentStepCheckBLL>();
+            container.RegisterType<IFlow_FormContentStepCheckRepository, Flow_FormContentStepCheckRepository>();
+
+            container.RegisterType<IFlow_FormContentBLL, Flow_FormContentBLL>();
+            container.RegisterType<IFlow_FormContentRepository, Flow_FormContentRepository>();
+
+            container.RegisterType<IFlow_FormAttrBLL, Flow_FormAttrBLL>();
+            container.RegisterType<IFlow_FormAttrRepository, Flow_FormAttrRepository>();
+
+            container.RegisterType<IFlow_FormBLL, Flow_FormBLL>();
+            container.RegisterType<IFlow_FormRepository, Flow_FormRepository>();
         }
     }
 }

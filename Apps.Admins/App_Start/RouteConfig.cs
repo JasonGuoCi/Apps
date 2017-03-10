@@ -9,6 +9,7 @@ namespace Apps.Admins
 {
     public class RouteConfig
     {
+        //private static string[] namespaces = new string[1] { "Apps.Admins" };
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -23,6 +24,7 @@ namespace Apps.Admins
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                 //namespaces: namespaces
             );
         }
     }
