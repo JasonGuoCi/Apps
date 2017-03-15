@@ -17,6 +17,8 @@ namespace Apps.Admins.Areas.Flow.Controllers
         [Dependency]
         public IFlow_FormBLL m_BLL { get; set; }
         ValidationErrors errors = new ValidationErrors();
+        [Dependency]
+        public IFlow_FormAttrBLL attr_BLL { get; set}
         // GET: Flow/Flow_Form
         public ActionResult Index()
         {
@@ -75,7 +77,30 @@ namespace Apps.Admins.Areas.Flow.Controllers
 
             return Json(json);
         }
+        [HttpPost]
+        public JsonResult GetFormAttrList(GridPager pager, string queryStr)
+        {
+            List<Flow_FormAttrModel> list = attr_BLL.GetList(ref pager, queryStr);
+            var json = new
+            {
+                total = pager.totalRows,
+                rows = (from r in list
+                        select new Flow_FormAttrModel()
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Name = r.Name,
+                            AttrType = r.AttrType,
+                            CheckJS = r.CheckJS,
+                            TypeId = r.TypeId,
+                            CreateTime = r.CreateTime
 
+                        }).ToArray()
+
+            };
+
+            return Json(json);
+        }
         #region 创建
         [SupportFilter]
         public ActionResult Create()

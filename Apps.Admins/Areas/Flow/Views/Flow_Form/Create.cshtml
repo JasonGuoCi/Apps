@@ -16,6 +16,12 @@
 
 <script type="text/javascript">
     $(function () {
+        jQuery("#accordion").accordion({ //初始化accordion
+            fillSpace: true,
+            fit: false,
+            border: false,
+            animate: false
+        });
         $("#btnSave").click(function () {
             if ($("form").valid()) {
                 $.ajax({
@@ -40,309 +46,506 @@
         $("#btnReturn").click(function () {
             window.parent.frameReturnByClose();
         });
+        //改变字段列表
+        $("#TypeName").change(function () {
+            $('#attrVal').val("");
+            $('#formAttrComboGrid').combogrid('setValue', '').combogrid('clear');
+            $("#formAttrComboGrid").combogrid('grid').datagrid("load", { queryStr: $("#TypeName").val() });
+        });
     });
+
+    //添加一个字段到表单
+    function AddAttr() {
+
+        var currentValue = $('#attrVal').val();
+        if (currentValue == "") {
+            $.messageBox5s('提示', "请选择要添加的字段！");
+        }
+        var charNo = $("#AttrList tr").size() + 1;//第几个字符
+        if (charNo > 26) {
+            $.messageBox5s('提示', "目前设计最高26个字段！");
+            return;
+        }
+        var b = false;
+        $("#AttrList input[type='hidden']").each(function (i) {//判断是否有重复的项目
+            if ($(this).val() == currentValue) {
+                b = true;
+                return;
+            }
+        });
+        if (b) {
+            $.messageBox5s('提示', "已经有重复的项目了！");
+            return;
+        }
+        var grid = $("#formAttrComboGrid").combogrid("grid");//获取表格对象
+        var row = grid.datagrid('getSelected');//获取行数据
+        var currentChar = "Attr" + getChar(charNo);//获取当前的字母
+        var example = getExample(row.AttrType);
+        //添加到候选区
+        $("#AttrList").append("<tr id='tr" + currentChar + "'><td style='text-align:right'>" + row.Title + "：</td>" +
+            "<td>" + example + "<input id='" + currentChar + "' name='" + currentChar + "' type='hidden' value='" + currentValue + "' /></td><td><a href=\"javascript:deleteCurrentTR('tr" + currentChar + "');\">[删除]</a></td></tr>");
+        //设置combogrid为空
+        $('#formAttrComboGrid').combogrid('setValue', '');
+    }
+    function deleteCurrentTR(c) {
+        $.messager.confirm('提示', '删除字段吗？', function (r) {
+            if (r) {
+                $("#" + c).remove();
+
+            }
+        });
+    }
+
+    function getExample(v) {
+        switch (v) {
+            case "文本": return "<input type='text' />";
+            case "多行文本": return "<textarea></textarea>";
+            case "数字": return "<input type='text' />";
+            case "日期": return "<input type='text' />";
+        }
+    }
+
+    function getChar(i) {
+        switch (i) {
+            case 1: return "A"; break;
+            case 2: return "B"; break;
+            case 3: return "C"; break;
+            case 4: return "D"; break;
+            case 5: return "E"; break;
+            case 6: return "F"; break;
+            case 7: return "G"; break;
+            case 8: return "H"; break;
+            case 9: return "I"; break;
+            case 10: return "J"; break;
+            case 11: return "K"; break;
+            case 12: return "L"; break;
+            case 13: return "M"; break;
+            case 14: return "N"; break;
+            case 15: return "O"; break;
+            case 16: return "P"; break;
+            case 17: return "Q"; break;
+            case 18: return "R"; break;
+            case 19: return "S"; break;
+            case 20: return "T"; break;
+            case 21: return "U"; break;
+            case 22: return "V"; break;
+            case 23: return "W"; break;
+            case 24: return "S"; break;
+            case 25: return "Y"; break;
+            case 26: return "Z"; break;
+            default: break;
+        }
+    }
 </script>
 <div class="mvctool bgb">
     @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
     @Html.ToolButton("btnReturn", "icon-return", "返回", false)
 </div>
-
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(model => model.Id)
-    <input id="CreateTime" type="hidden" name="CreateTime" value="2000-1-1" />
-    <table class="fromEditTable setTextWidth300">
-        <tbody>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.Name)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.Name)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.Name)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.Remark)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.Remark)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.Remark)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.UsingDep)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.UsingDep)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.UsingDep)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.TypeId)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.TypeId)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.TypeId)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.State)：
-                </td>
-                <td style="width:310px">
-                    @Html.CheckBoxFor(model => model.State, new { @checked = true })
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.State)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.HtmlForm)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.HtmlForm)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.HtmlForm)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrA)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrA)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrA)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrB)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrB)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrB)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrC)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrC)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrC)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrD)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrD)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrD)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrE)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrE)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrE)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrF)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrF)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrF)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrG)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrG)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrG)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrH)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrH)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrH)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrI)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrI)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrI)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrJ)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrJ)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrJ)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrK)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrK)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrK)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrL)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrL)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrL)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrM)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrM)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrM)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrN)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrN)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrN)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrO)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrO)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrO)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrP)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrP)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrP)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrQ)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrQ)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrQ)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrR)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrR)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrR)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrS)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrS)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrS)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrT)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrT)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrT)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrU)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrU)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrU)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrV)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrV)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrV)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrW)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrW)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrW)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrX)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrX)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrX)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrY)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrY)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrY)</td>
-            </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.AttrZ)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.AttrZ)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.AttrZ)</td>
-            </tr>
-        </tbody>
-    </table>
+    <div id="accordion" class="easyui-accordion">
+        <div title="第一步：设计表单" style="overflow: auto; padding: 10px;">
+            @Html.HiddenFor(model => model.Id)
+            <table class="fromEditTable setTextWidth300">
+                <tbody>
+                    <tr>
+                        <td style="width: 100px; text-align: right;">
+                            @Html.LabelFor(model => model.Name)：
+                        </td>
+                        <td style="width: 310px">
+                            @Html.EditorFor(model => model.Name)
+                        </td>
+                        <td>@Html.ValidationMessageFor(model => model.Name)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; text-align: right;">
+                            @Html.LabelFor(model => model.Remark)：
+                        </td>
+                        <td style="width: 310px">
+                            @Html.TextAreaFor(model => model.Remark, 5, 80, new { })
+                        </td>
+                        <td>@Html.ValidationMessageFor(model => model.Remark)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; text-align: right;">
+                            @Html.LabelFor(model => model.UsingDep)：
+                        </td>
+                        <td style="width: 310px">
+                            @Html.EditorFor(model => model.UsingDep)
+                        </td>
+                        <td>@Html.ValidationMessageFor(model => model.UsingDep)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; text-align: right;">
+                            @Html.LabelFor(model => model.TypeId)：
+                        </td>
+                        <td style="width: 310px">
+                            @Html.DropDownListFor(model => model.TypeId, ViewBag.FlowType as SelectList)
+                        </td>
+                        <td>@Html.ValidationMessageFor(model => model.TypeId)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; text-align: right;">
+                            @Html.LabelFor(model => model.State)：
+                        </td>
+                        <td style="width: 310px">
+                            @Html.CheckBoxFor(model => model.State, new { @checked = true })
+                        </td>
+                        <td>@Html.ValidationMessageFor(model => model.State)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="float: right" class="pic_204"></div>
+                        </td>
+                        <td colspan="2" class="gray">注：设计好表单和字段才能组成一个完整的表单,设计好表单后才能设计步骤</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div title="第二步：添加字段" style="overflow: auto;">
+            <table class="fromEditTable setTextWidth300 bgb">
+                <tr>
+                    <td style="width:40px; text-align: right;">
+                        类别：
+                    </td>
+                    <td style="width: 110px;">
+                        @Html.DropDownListFor(model => model.TypeName, ViewBag.FlowType as SelectList, new { @style = "width:100px;" })
+                    </td>
+                    <td style="width:40px; text-align: right;">
+                        字段：
+                    </td>
+                    <td style="width: 210px">
+                        <input id="attrVal" name="attrVal" type="hidden" />
+                        <select class="easyui-combogrid" style="width:200px" id="formAttrComboGrid" data-options="
+                                panelWidth:470,
+                                idField:'Id' ,
+                                textField:'Title',
+                                rownumbers:true,
+                                url:'@Url.Action("GetFormAttrList")?page=1&sort =Id&rows =1000&order =desc',
+                                page:1,
+                                columns [[
+                                { field:'Id', title:'ID', width:80, hidden:true },
+                                { field:'Title', title:'字段标题', width:80, sortable:true },
+                                { field:'Name', title:'英文名称', width:80, sortable:true },
+                                { field:'AttrType', title:'类型', width:80, sortable:true },
+                                { field:'CheckJS', title:'校验脚本', width:50, sortable:true },
+                                {field:'CreateTime', title:'创建时间', width:80, sortable:true }
+                                ]],
+                                onClickRow function (index, data) {
+                                var value=$('#formAttrComboGrid').combogrid('getValue');
+                                $('#attrVal').val(value);
+                                },
+                                onLoadSuccess:function (data) {
+                                },
+                                fitColumns true
+                                "></select>
+                    </td>
+                    <td>
+                        <a href="javascript:AddAttr();" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</a>
+                    </td>
+                </tr>
+            </table>
+
+            <table id="AttrList" class="fromEditTable setTextWidth300"></table>
+        </div>
+    </div>
 }
+@*@using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.Id)
+        <input id="CreateTime" type="hidden" name="CreateTime" value="2000-1-1" />
+        <table class="fromEditTable setTextWidth300">
+            <tbody>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.Name)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.Name)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.Remark)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.Remark)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.Remark)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.UsingDep)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.UsingDep)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.UsingDep)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.TypeId)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.TypeId)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.TypeId)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.State)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.CheckBoxFor(model => model.State, new { @checked = true })
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.State)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.HtmlForm)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.HtmlForm)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.HtmlForm)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrA)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrA)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrA)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrB)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrB)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrB)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrC)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrC)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrC)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrD)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrD)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrD)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrE)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrE)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrE)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrF)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrF)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrF)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrG)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrG)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrG)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrH)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrH)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrH)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrI)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrI)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrI)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrJ)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrJ)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrJ)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrK)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrK)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrK)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrL)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrL)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrL)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrM)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrM)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrM)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrN)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrN)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrN)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrO)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrO)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrO)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrP)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrP)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrP)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrQ)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrQ)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrQ)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrR)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrR)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrR)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrS)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrS)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrS)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrT)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrT)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrT)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrU)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrU)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrU)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrV)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrV)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrV)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrW)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrW)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrW)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrX)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrX)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrX)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrY)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrY)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrY)</td>
+                </tr>
+                <tr>
+                    <td style="width:100px; text-align:right;">
+                        @Html.LabelFor(model => model.AttrZ)：
+                    </td>
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.AttrZ)
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.AttrZ)</td>
+                </tr>
+            </tbody>
+        </table>
+    }*@
 
 
