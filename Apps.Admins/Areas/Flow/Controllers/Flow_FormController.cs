@@ -18,7 +18,7 @@ namespace Apps.Admins.Areas.Flow.Controllers
         public IFlow_FormBLL m_BLL { get; set; }
         ValidationErrors errors = new ValidationErrors();
         [Dependency]
-        public IFlow_FormAttrBLL attr_BLL { get; set}
+        public IFlow_FormAttrBLL attr_BLL { get; set; }
         // GET: Flow/Flow_Form
         public ActionResult Index()
         {

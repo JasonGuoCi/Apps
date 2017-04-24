@@ -58,7 +58,8 @@ namespace Apps.Admins.Areas.Flow.Controllers
         public ActionResult Create()
         {
             ViewBag.Perm = GetPermission();
-            //ViewBag.FlowType = new SelectList(t_BLL.GetList(ref pager, ""), "Id", "Name");
+            //GridPager setPager
+           // ViewBag.FlowType = new SelectList(m_BLL.GetList(ref setPager, ""), "Id", "Name");
             return View();
         }
 
