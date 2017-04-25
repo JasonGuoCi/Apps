@@ -111,25 +111,25 @@
                 </td>
 
             </tr>
-            <tr>
-                <td style="width:100px; text-align:right;">
-                    @Html.LabelFor(model => model.TypeId)：
-                </td>
-                <td style="width:310px">
-                    @Html.EditorFor(model => model.TypeId)
-                </td>
-                <td>@Html.ValidationMessageFor(model => model.TypeId)</td>
-            </tr>
-
             @*<tr>
-                    <td style="width: 100px; text-align: right;">
+                    <td style="width:100px; text-align:right;">
                         @Html.LabelFor(model => model.TypeId)：
                     </td>
-                    <td style="width: 310px">
-                        @Html.DropDownListFor(model => model.TypeId, ViewBag.FlowType as SelectList)
+                    <td style="width:310px">
+                        @Html.EditorFor(model => model.TypeId)
                     </td>
                     <td>@Html.ValidationMessageFor(model => model.TypeId)</td>
                 </tr>*@
+
+            <tr>
+                <td style="width: 100px; text-align: right;">
+                    @Html.LabelFor(model => model.TypeId)：
+                </td>
+                <td style="width: 310px">
+                    @Html.DropDownListFor(model => model.TypeId, ViewBag.FlowType as SelectList)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.TypeId)</td>
+            </tr>
             <tr>
                 <td style="width:100px; text-align:right;">
                     @Html.LabelFor(model => model.CreateTime)：

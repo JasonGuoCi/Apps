@@ -19,6 +19,9 @@ namespace Apps.Admins.Areas.Flow.Controllers
         ValidationErrors errors = new ValidationErrors();
         [Dependency]
         public IFlow_FormAttrBLL attr_BLL { get; set; }
+
+        [Dependency]
+        public IFlow_TypeBLL t_BLL { get; set; }
         // GET: Flow/Flow_Form
         public ActionResult Index()
         {
@@ -80,6 +83,11 @@ namespace Apps.Admins.Areas.Flow.Controllers
         [HttpPost]
         public JsonResult GetFormAttrList(GridPager pager, string queryStr)
         {
+            //html could not pass the  parameters,use the below code to set values.
+            pager.order = "Desc";
+            pager.page = 1;
+            pager.sort = "Id";
+            pager.rows = 1000;
             List<Flow_FormAttrModel> list = attr_BLL.GetList(ref pager, queryStr);
             var json = new
             {
@@ -106,6 +114,14 @@ namespace Apps.Admins.Areas.Flow.Controllers
         public ActionResult Create()
         {
             ViewBag.Perm = GetPermission();
+            GridPager setPager = new GridPager()
+            {
+                rows = 1000,
+                page = 1,
+                sort = "Id",
+                order = "Desc"
+            };
+            ViewBag.FlowType = new SelectList(t_BLL.GetList(ref setPager, "").Distinct(), "Id", "Name");
             return View();
         }
 

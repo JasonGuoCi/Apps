@@ -15,25 +15,25 @@ namespace Apps.Models.Flow
         public string Id { get; set; }
 
         [MaxWordsExpression(100)]
-        [Display(Name = "Name")]
+        [Display(Name = "表单名称")]
         public string Name { get; set; }
 
         [MaxWordsExpression(500)]
-        [Display(Name = "Remark")]
+        [Display(Name = "说明")]
         public string Remark { get; set; }
 
         [MaxWordsExpression(2000)]
-        [Display(Name = "UsingDep")]
+        [Display(Name = "使用部门")]
         public string UsingDep { get; set; }
 
         [MaxWordsExpression(50)]
-        [Display(Name = "TypeId")]
+        [Display(Name = "分类")]
         public string TypeId { get; set; }
 
-        [Display(Name = "是否完成流程")]
+        [Display(Name = "是否启用")]
         public bool State { get; set; }
 
-        [Display(Name = "CreateTime")]
+        [Display(Name = "创建时间")]
         public DateTime? CreateTime { get; set; }
 
         [MaxWordsExpression(16)]
