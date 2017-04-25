@@ -143,5 +143,8 @@ namespace Apps.Models.Flow
         [MaxWordsExpression(50)]
         [Display(Name = "AttrZ")]
         public string AttrZ { get; set; }
+
+        public List<Flow_FormAttrModel> attrList { get; set; }
+        public List<Flow_StepModel> stepList { get; set; }
     }
 }
