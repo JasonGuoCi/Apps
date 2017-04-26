@@ -152,6 +152,11 @@ namespace Apps.Admins.Areas.Flow.Controllers
 
         }
 
+        private List<Flow_FormModel> GetStepRuleListByStepId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpPost]
         [SupportFilter(ActionName = "Edit")]
         public JsonResult EditStep(Flow_StepModel model)

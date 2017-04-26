@@ -50,5 +50,8 @@ namespace Apps.Models.Flow
         public bool IsEditAttr { get; set; }
 
         public List<Flow_FormModel> stepRuleList { get; set; }
+        [Display(Name = "第几步")]
+        public string StepNo { get; set; }
+        public string Action { get; set; }
     }
 }

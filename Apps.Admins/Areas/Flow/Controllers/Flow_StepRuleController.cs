@@ -15,6 +15,8 @@ namespace Apps.Admins.Areas.Flow.Controllers
     {
         [Dependency]
         public IFlow_StepRuleBLL m_BLL { get; set; }
+        [Dependency]
+        public IFlow_StepBLL step_BLL { get; set; }
         ValidationErrors errors = new ValidationErrors();
         // GET: Flow/Flow_StepRule
         public ActionResult Index()
@@ -115,6 +117,42 @@ namespace Apps.Admins.Areas.Flow.Controllers
             {
                 return Json(JsonHandler.CreateMessage(0, Suggestion.EditFail));
             }
+        }
+
+        [SupportFilter(ActionName = "Edit")]
+        public ActionResult StepList(string id)
+        {
+            ViewBag.FormId = id;
+            return View();
+        }
+        [HttpPost]
+        [SupportFilter(ActionName = "Edit")]
+        public JsonResult GetStepList(GridPager pager, string id)
+        {
+            List<Flow_StepModel> stepList = step_BLL.GetList(ref pager, id);
+            int i = 1;
+            var json = new
+            {
+                total = pager.totalRows,
+                rows = (from r in stepList
+                        select new Flow_StepModel()
+                        {
+                            StepNo = "第 " + (i++) + " 步",
+                            Id = r.Id,
+                            Name = r.Name,
+                            Remark = r.Remark,
+                            Sort = r.Sort,
+                            FormId = r.FormId,
+                            FlowRule = r.FlowRule,
+                            Action = "<a href='javascript:SetRule(\"" + r.Id + "\")'>分支(" + GetStepRuleListByStepId(r.Id).Count() + ")</a></a>"
+                        }).ToArray()
+            };
+            return Json(json);
+        }
+
+        private List<int> GetStepRuleListByStepId(string id)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
