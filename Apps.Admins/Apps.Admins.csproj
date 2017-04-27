@@ -576,6 +576,8 @@
     <Content Include="Areas\Flow\Views\Flow_Type\Create.cshtml" />
     <Content Include="Areas\Flow\Views\Flow_Type\Details.cshtml" />
     <Content Include="Areas\Flow\Views\Flow_Step\EditStep.cshtml" />
+    <Content Include="Areas\Flow\Views\Flow_StepRule\StepList.cshtml" />
+    <Content Include="Areas\Flow\Views\Flow_StepRule\StepRuleList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easyui\easyloader.js" />
     <Content Include="Scripts\easyui\jquery-1.8.0.min.js" />

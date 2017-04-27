@@ -21,6 +21,9 @@ namespace Apps.Models.Flow
         [MaxWordsExpression(50)]
         [Display(Name = "AttrId")]
         public string AttrId { get; set; }
+        [MaxWordsExpression(50)]
+        [Display(Name = "AttrName")]
+        public string AttrName { get; set; }
 
         [MaxWordsExpression(10)]
         [Display(Name = "Operator")]
@@ -33,5 +36,15 @@ namespace Apps.Models.Flow
         [MaxWordsExpression(50)]
         [Display(Name = "NextStep")]
         public string NextStep { get; set; }
+        [MaxWordsExpression(50)]
+        [Display(Name = "Mes")]
+        public string Mes { get; set; }
+        [MaxWordsExpression(50)]
+        [Display(Name = "NextStepName")]
+        public string NextStepName { get; set; }
+        [MaxWordsExpression(50)]
+        [Display(Name = "Action")]
+        public string Action { get; set; }
+
     }
 }

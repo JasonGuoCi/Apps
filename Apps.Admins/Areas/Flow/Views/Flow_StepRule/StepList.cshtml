@@ -1,0 +1,56 @@
+﻿<table id="List"></table>
+<div id="modelwindow" class="easyui-window" data-options="modal:true,closed:true,minimizable:false,shadow:false"></div>
+<script type="text/javascript">
+    $(function () {
+        $("#List").datagrid({
+            url: '@Url.Action("GetSetpList")?id=@(ViewBag.FormId)',
+            width: SetGridWidthSub(10),
+            method: 'post',
+            height: SetGridHeightSub(39),
+            fitColumns: true,
+            sortName: 'Sort',
+            sortOrder: 'asc',
+            idField: 'Id',
+            pageSize: 15,
+            pageList: [15, 20, 30, 40, 50],
+            pagination: true,
+            striped: true,//奇偶行区分
+            singleSeleted: true,//行号
+            columns: [[
+                { field: 'StepNo', title: '步骤', width: 80 },
+                { field: 'Id', title: '', width: 80, hidden: true },
+                { field: 'Name', title: '步骤名称', width: 80, sortable: true },
+                { field: 'Remark', title: '步骤说明', width: 280, sortable: true },
+                { field: 'Sort', title: '排序', width: 80, sortable: true, hidden: true },
+                { field: 'FormId', title: '所属表单', width: 80, sortable: true, hidden: true },
+                { field: 'FlowRule', title: '流转规则', width: 80, sortable: true },
+                { field: 'Action', title: '操作分支', width: 80, align: 'center', sortable: true }
+            ]]
+        });
+    });
+    //iframe返回
+    function frameReturnByClose() {
+        $("#modalwindow"), window('close');
+    }
+    function frameReturnByReload(flag) {
+        if (flag) {
+            $("#List").datagrid('load');
+        }
+        else {
+            $("#List").datagrid('reload');
+        }
+    }
+    function frameReturnByMes(mes) {
+        $.messageBox5s('提示', mes);
+    }
+    function SetRule(stepId) {
+        $("#modalwindow").html("<iframe width='100%' height='100%' scrolling='no' frameborde='0' src='/Flow/Form/StepRuleList?stepId=" + stepId + "&formId=@(ViewBag.FormId)'></iframe>");
+        $("#modalwindow").window({ title: '设置分支', width: 620, height: 300, iconCls: 'icon-add' }).window('open');
+    }
+    function SetGridWidthSub(w) {
+        return $(window).width() - w;
+    }
+    function SetGridHeightSub(h) {
+        return $(window).height() - h
+    }
+</script>
