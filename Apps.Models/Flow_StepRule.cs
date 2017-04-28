@@ -20,6 +20,8 @@ namespace Apps.Models
         public string Operator { get; set; }
         public string Result { get; set; }
         public string NextStep { get; set; }
+        public string AttrName { get; set; }
+        public string NextStepName { get; set; }
     
         public virtual Flow_Step Flow_Step { get; set; }
     }

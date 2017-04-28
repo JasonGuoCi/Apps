@@ -124,63 +124,63 @@ namespace Apps.Admins.Areas.Flow.Controllers
             }
         }
 
-        [SupportFilter(ActionName = "Edit")]
-        public ActionResult EditStep(string id)
-        {
-            ViewBag.Perm = GetPermission();
-            Flow_FormModel flowFormModel = f_BLL.GetById(id);
-            GridPager setNoPagerDescBySort = new GridPager
-            {
-                sort = "Id",
-                rows = 100,
-                order = "desc",
-                page = 1
-            };
-            List<Flow_StepModel> stepList = m_BLL.GetList(ref setNoPagerDescBySort, flowFormModel.Id);
+        //[SupportFilter(ActionName = "Edit")]
+        //public ActionResult EditStep(string id)
+        //{
+        //    ViewBag.Perm = GetPermission();
+        //    Flow_FormModel flowFormModel = f_BLL.GetById(id);
+        //    GridPager setNoPagerDescBySort = new GridPager
+        //    {
+        //        sort = "Id",
+        //        rows = 100,
+        //        order = "desc",
+        //        page = 1
+        //    };
+        //    List<Flow_StepModel> stepList = m_BLL.GetList(ref setNoPagerDescBySort, flowFormModel.Id);
 
-            foreach (var r in stepList)
-            {
-                r.stepRuleList = GetStepRuleListByStepId(r.Id);
-            }
+        //    foreach (var r in stepList)
+        //    {
+        //        r.stepRuleList = GetStepRuleListByStepId(r.Id);
+        //    }
 
-            flowFormModel.stepList = stepList;//获取表单关联的步骤
-            ViewBag.Form = flowFormModel;
-            Flow_StepModel model = new Flow_StepModel();
-            model.FormId = flowFormModel.Id;
-            model.IsEditAttr = true;
-            return View(model);
+        //    flowFormModel.stepList = stepList;//获取表单关联的步骤
+        //    ViewBag.Form = flowFormModel;
+        //    Flow_StepModel model = new Flow_StepModel();
+        //    model.FormId = flowFormModel.Id;
+        //    model.IsEditAttr = true;
+        //    return View(model);
 
-        }
+        //}
 
-        private List<Flow_FormModel> GetStepRuleListByStepId(string id)
-        {
-            throw new NotImplementedException();
-        }
+        //private List<Flow_FormModel> GetStepRuleListByStepId(string id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        [HttpPost]
-        [SupportFilter(ActionName = "Edit")]
-        public JsonResult EditStep(Flow_StepModel model)
-        {
-            model.Id = ResultHelper.NewId;
-            if (model != null && ModelState.IsValid)
-            {
-                if (m_BLL.Create(ref errors, model))
-                {
-                    LogHandler.WriteServiceLog(GetUserId(), "Id" + model.Id + ",Name" + model.Name, "成功", "创建", "Flow_Step");
-                    return Json(JsonHandler.CreateMessage(1, Suggestion.InsertSucceed, model.Id));
-                }
-                else
-                {
-                    string ErrorCol = errors.Error;
-                    LogHandler.WriteServiceLog(GetUserId(), "Id" + model.Id + ",Name" + model.Name + "," + ErrorCol, "失败", "创建", "Flow_Step");
-                    return Json(JsonHandler.CreateMessage(0, Suggestion.InsertFail + ErrorCol));
-                }
-            }
-            else
-            {
-                return Json(JsonHandler.CreateMessage(0, Suggestion.InsertFail));
-            }
-        }
+        //[HttpPost]
+        //[SupportFilter(ActionName = "Edit")]
+        //public JsonResult EditStep(Flow_StepModel model)
+        //{
+        //    model.Id = ResultHelper.NewId;
+        //    if (model != null && ModelState.IsValid)
+        //    {
+        //        if (m_BLL.Create(ref errors, model))
+        //        {
+        //            LogHandler.WriteServiceLog(GetUserId(), "Id" + model.Id + ",Name" + model.Name, "成功", "创建", "Flow_Step");
+        //            return Json(JsonHandler.CreateMessage(1, Suggestion.InsertSucceed, model.Id));
+        //        }
+        //        else
+        //        {
+        //            string ErrorCol = errors.Error;
+        //            LogHandler.WriteServiceLog(GetUserId(), "Id" + model.Id + ",Name" + model.Name + "," + ErrorCol, "失败", "创建", "Flow_Step");
+        //            return Json(JsonHandler.CreateMessage(0, Suggestion.InsertFail + ErrorCol));
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return Json(JsonHandler.CreateMessage(0, Suggestion.InsertFail));
+        //    }
+        //}
         #endregion
 
         #region 详细

@@ -156,6 +156,8 @@
           <Property Name="Operator" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Result" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NextStep" Type="varchar" MaxLength="50" />
+          <Property Name="AttrName" Type="varchar" MaxLength="1024" />
+          <Property Name="NextStepName" Type="varchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="Flow_Type">
           <Key>
@@ -1456,6 +1458,8 @@
           <Property Name="Result" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NextStep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Flow_Step" Relationship="AppsDBModel.FK_Flow_StepRule_Flow_Step" FromRole="Flow_StepRule" ToRole="Flow_Step" />
+          <Property Name="AttrName" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="NextStepName" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Flow_Type">
           <Key>
@@ -2015,6 +2019,8 @@
           <EntitySetMapping Name="Flow_StepRule">
             <EntityTypeMapping TypeName="AppsDBModel.Flow_StepRule">
               <MappingFragment StoreEntitySet="Flow_StepRule">
+                <ScalarProperty Name="NextStepName" ColumnName="NextStepName" />
+                <ScalarProperty Name="AttrName" ColumnName="AttrName" />
                 <ScalarProperty Name="NextStep" ColumnName="NextStep" />
                 <ScalarProperty Name="Result" ColumnName="Result" />
                 <ScalarProperty Name="Operator" ColumnName="Operator" />

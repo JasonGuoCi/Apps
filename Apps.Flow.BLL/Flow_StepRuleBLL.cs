@@ -43,8 +43,10 @@ namespace Apps.Flow.BLL
                                                   select new Flow_StepRuleModel
                                                   {
                                                       AttrId = r.AttrId,
+                                                      AttrName = r.AttrName,
                                                       Id = r.Id,
                                                       NextStep = r.NextStep,
+                                                      NextStepName = r.NextStepName,
                                                       Operator = r.Operator,
                                                       Result = r.Result,
                                                       StepId = r.StepId
@@ -64,8 +66,10 @@ namespace Apps.Flow.BLL
                 }
                 entity = new Flow_StepRule();
                 entity.AttrId = model.AttrId;
+                entity.AttrName = model.AttrName;
                 entity.Id = model.Id;
                 entity.NextStep = model.NextStep;
+                entity.NextStepName = model.NextStepName;
                 entity.Operator = model.Operator;
                 entity.Result = model.Result;
                 entity.StepId = model.StepId;
@@ -149,8 +153,10 @@ namespace Apps.Flow.BLL
                     return false;
                 }
                 entity.AttrId = model.AttrId;
+                entity.AttrName = model.AttrName;
                 entity.Id = model.Id;
                 entity.NextStep = model.NextStep;
+                entity.NextStepName = model.NextStepName;
                 entity.Operator = model.Operator;
                 entity.Result = model.Result;
                 entity.StepId = model.StepId;
@@ -189,8 +195,10 @@ namespace Apps.Flow.BLL
                 Flow_StepRule entity = m_Rep.GetById(id);
                 Flow_StepRuleModel model = new Flow_StepRuleModel();
                 model.AttrId = entity.AttrId;
+                model.AttrName = entity.AttrName;
                 model.Id = entity.Id;
                 model.NextStep = entity.NextStep;
+                model.NextStepName = entity.NextStepName;
                 model.Operator = entity.Operator;
                 model.Result = entity.Result;
                 model.StepId = entity.StepId;

@@ -134,6 +134,7 @@
         var centerVal = $("#CenterVal").val();
         var rightVal = $("#RightVal").val();
         var nextVal = $("#NextVal").val();
+        var nextText = $("option[value='" + nextVal + "']").html();
 
         if (rightVal == "") {
             $.messageBox5s('提示', '值不能为空');
@@ -142,9 +143,11 @@
         $.post("@Url.Action("CreateStepEvent")", {
             "StepId": stepId,
             "AttrId": leftVal,
+            "AttrName": leftText,
             "Operator": centerVal,
             "Result": rightVal,
-            "NextVal": nextVal
+            "NextStep": nextVal,
+            "NextStepName":nextText
         }, function (data) {
             if (data.type == 1) {
                 $("#List").datagrid('load');

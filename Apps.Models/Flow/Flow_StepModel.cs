@@ -49,7 +49,7 @@ namespace Apps.Models.Flow
         [Display(Name = "审核者是否可以编辑发起者的附件")]
         public bool IsEditAttr { get; set; }
 
-        public List<Flow_FormModel> stepRuleList { get; set; }
+        public List<Flow_StepRuleModel> stepRuleList { get; set; }
         [Display(Name = "第几步")]
         public string StepNo { get; set; }
         public string Action { get; set; }

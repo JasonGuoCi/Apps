@@ -26,7 +26,7 @@ namespace Apps.Flow.BLL
             IQueryable<Flow_Step> queryData = null;
             if (!string.IsNullOrWhiteSpace(queryStr))
             {
-                queryData = m_Rep.GetList(db).Where(a => a.Name.Contains(queryStr) || a.Remark.Contains(queryStr));
+                queryData = m_Rep.GetList(db).Where(a => a.Name.Contains(queryStr) || a.Remark.Contains(queryStr) || a.FormId.Contains(queryStr));
             }
             else
             {

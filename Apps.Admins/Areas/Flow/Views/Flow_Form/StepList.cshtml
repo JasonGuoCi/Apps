@@ -1,9 +1,28 @@
-﻿<table id="List"></table>
-<div id="modelwindow" class="easyui-window" data-options="modal:true,closed:true,minimizable:false,shadow:false"></div>
+﻿@model Apps.Models.Flow.Flow_StepModel
+@using Apps.Models.Flow;
+@using Apps.Common;
+@using Apps.Models.Sys;
+@using Apps.Admins.Core;
+
+@{
+    ViewBag.Title = "StepList";
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<permModel> perm = (List<permModel>)ViewBag.Perm;
+    if (perm == null)
+    {
+        perm = new List<permModel>();
+    }
+
+    Flow_FormModel formModel = (Flow_FormModel)ViewBag.Form;
+
+}
+<table id="List"></table>
+<div id="modalwindow" class="easyui-window" data-options="modal:true,closed:true,minimizable:false,shadow:false"></div>
+@Html.Partial("~/Views/Shared/_Partial_AutoGrid.cshtml")
 <script type="text/javascript">
     $(function () {
         $("#List").datagrid({
-            url: '@Url.Action("GetSetpList")?id=@(ViewBag.FormId)',
+            url: '@Url.Action("GetStepList")?id=@(ViewBag.FormId)',
             width: SetGridWidthSub(10),
             method: 'post',
             height: SetGridHeightSub(39),
@@ -44,7 +63,7 @@
         $.messageBox5s('提示', mes);
     }
     function SetRule(stepId) {
-        $("#modalwindow").html("<iframe width='100%' height='100%' scrolling='no' frameborde='0' src='/Flow/Form/StepRuleList?stepId=" + stepId + "&formId=@(ViewBag.FormId)'></iframe>");
+        $("#modalwindow").html("<iframe width='100%' height='100%' scrolling='no' frameborde='0' src='/Flow/Flow_Form/StepRuleList?stepId=" + stepId + "&formId=@(ViewBag.FormId)'></iframe>");
         $("#modalwindow").window({ title: '设置分支', width: 620, height: 300, iconCls: 'icon-add' }).window('open');
     }
     function SetGridWidthSub(w) {
