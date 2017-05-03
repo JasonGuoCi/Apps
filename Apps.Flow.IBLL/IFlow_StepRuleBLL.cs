@@ -11,6 +11,7 @@ namespace Apps.Flow.IBLL
     public interface IFlow_StepRuleBLL
     {
         List<Flow_StepRuleModel> GetList(ref GridPager pager, string queryStr);
+        List<Flow_StepRuleModel> GetList(string stepId);
         bool Create(ref ValidationErrors errors, Flow_StepRuleModel model);
         bool Delete(ref ValidationErrors errors, string id);
         bool Delete(ref ValidationErrors errors, string[] deleteCollection);

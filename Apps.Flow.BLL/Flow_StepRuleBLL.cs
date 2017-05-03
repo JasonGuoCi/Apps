@@ -36,6 +36,21 @@ namespace Apps.Flow.BLL
             queryData = LinqHelper.SortingAndPaging(queryData, pager.sort, pager.order, pager.page, pager.rows);
             return CreateModelList(ref queryData);
         }
+        public List<Flow_StepRuleModel> GetList(string stepId)
+        {
+
+            IQueryable<Flow_StepRule> queryData = null;
+            if (!string.IsNullOrWhiteSpace(stepId))
+            {
+                queryData = m_Rep.GetList(db).Where(a => a.StepId.Contains(stepId));
+            }
+            else
+            {
+                queryData = m_Rep.GetList(db);
+            }
+
+            return CreateModelList(ref queryData);
+        }
         private List<Flow_StepRuleModel> CreateModelList(ref IQueryable<Flow_StepRule> queryData)
         {
 

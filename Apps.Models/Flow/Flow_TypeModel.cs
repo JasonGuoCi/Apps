@@ -27,5 +27,8 @@ namespace Apps.Models.Flow
 
         [Display(Name = "排序")]
         public int Sort { get; set; }
+
+        public List<Flow_FormModel> formList { get; set; }
+
     }
 }

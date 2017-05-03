@@ -139,5 +139,22 @@ namespace Apps.Models.Sys
         [Display(Name = "Flag")]
         public string Flag { get; set; }
 
+
+        [MaxWordsExpression(4000)]
+        [Display(Name = "上级领导")]
+        public string Lead { get; set; }
+
+        [MaxWordsExpression(4000)]
+        [Display(Name = "上级领导")]
+        public string LeadName { get; set; }
+
+        [Display(Name = "是否可以自选领导")]
+        public bool IsSelLead { get; set; }
+
+        [Display(Name = "日否启动日程汇报是否启用  启用后 他的上司领导将可以看到他的 工作日程汇报.")]
+        public bool IsReportCalendar { get; set; }
+
+        [Display(Name = "开启 小秘书消息提示(默认每10分钟提示一次)开启 小秘书消息提示(每2分钟提示一次)开启 小秘书消息提示(每5分钟提示一次)开启 小秘书消息提示(每20分钟提示一次)开启 小秘书消息提示(每30分钟提示一次)开启 小秘书消息提示(每1小时提示一次)开启 小秘书消息提示(每2小时提示一次)禁用 小秘书消息提示(不再提示)")]
+        public bool IsSecretary { get; set; }
     }
 }

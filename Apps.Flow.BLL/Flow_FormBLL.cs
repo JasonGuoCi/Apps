@@ -79,7 +79,21 @@ namespace Apps.Flow.BLL
                                               }).ToList();
             return modelList;
         }
+        public List<Flow_FormModel> GetListByTypeId(string typeId)
+        {
 
+            IQueryable<Flow_Form> queryData = null;
+            if (!string.IsNullOrWhiteSpace(typeId))
+            {
+                queryData = m_Rep.GetList(db).Where(a => a.TypeId.Contains(typeId));
+            }
+            else
+            {
+                queryData = m_Rep.GetList(db);
+            }
+
+            return CreateModelList(ref queryData);
+        }
         public bool Create(ref ValidationErrors errors, Flow_FormModel model)
         {
             try

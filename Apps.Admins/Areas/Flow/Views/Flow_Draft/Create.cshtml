@@ -1,0 +1,98 @@
+﻿@model Apps.Models.Flow.Flow_FormContentModel
+@using Apps.Common;
+@using Apps.Models.Sys;
+@using Apps.Models.Flow;
+@using Apps.Admins;
+@using Apps.Admins.Core;
+@{
+    ViewBag.Title = "创建";
+    Layout = "~/Views/Shared/_Index_Layout.cshtml";
+    List<permModel> perm = (List<permModel>)ViewBag.Perm;
+    if (perm == null)
+    {
+        perm = new List<permModel>();
+    }
+}
+<script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").click(function () {
+            if ($("#Title").val() == "") {
+                $.messageBox5s("提示", "表单标题必须填写！");
+                return false;
+            }
+            if (CheckForm()) {
+                $.ajax({
+                    url: "@Url.Action("Create")",
+                    type: "Post",
+                    data: $("form").serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.type == 1) {
+                            $.messageBox5s("添加成功", data.message);
+                            $("#btnSave").hide();
+                        }
+                        else {
+                            window.parent.frameReturnByMes(data.message);
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+
+        $("#btnReturn").click(function () {
+            if ($("#btnSave").is(":hidden")) {
+                window.parent.closeCurrentWin();
+            }
+            else {
+                $.message.confirm('提示', '没有保存的数据将会丢失，你确定要返回吗？', function (r) {
+                    if (r) {
+                        window.parent.closeCurrentWin();
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+@Html.Raw(ViewBag.HtmlJS)
+<div class="mvctool">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Create", true)
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+@using (Html.BeginForm())
+{
+    <table class="fromEditTable setTextWidth300">
+        <tbody>
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.FormId)
+            @Html.HiddenFor(model => model.UserId)
+
+            <input id="CreateTime" type="hidden" name="CrateTime" value="2017-5-2" />
+            <input id="TimeOut" type="hidden" name="TimeOut" value="2117-5-2" />
+            @*<tr>
+                <td style="width:100px;text-align:right;">
+                    @Html.LabelFor(model => model.Title);
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Title);
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.Title)
+                </td>
+            </tr>*@
+            @Html.Raw(ViewBag.Html)
+            <tr>
+                <td style="width:100px; text-align:right;">紧急程度：</td>
+                <td>
+                    <select name="FormLevel" id="FormLevel">
+                        <option value="普通">普通</option>
+                        <option value="重要">重要</option>
+                        <option value="紧急">紧急</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

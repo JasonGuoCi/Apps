@@ -11,6 +11,7 @@ namespace Apps.Flow.IBLL
     public interface IFlow_FormBLL
     {
         List<Flow_FormModel> GetList(ref GridPager pager, string queryStr);
+        List<Flow_FormModel> GetListByTypeId(string id);
         bool Create(ref ValidationErrors errors, Flow_FormModel model);
         bool Delete(ref ValidationErrors errors, string id);
         bool Delete(ref ValidationErrors errors, string[] deleteCollection);

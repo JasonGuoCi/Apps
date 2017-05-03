@@ -14,6 +14,8 @@ namespace Apps.IBLL
         List<permModel> GetPermission(string accountId, string controller);
 
         List<SysUserModel> GetList(ref GridPager pager, string queryStr);
+        List<SysUserModel> GetListByPostId(string posId);
+        List<SysUserModel> GetUserByDepId(ref GridPager pager, string str, string str2);
         bool Create(ref ValidationErrors errors, SysUserModel model);
         bool Delete(ref ValidationErrors errors, string id);
         bool Delete(ref ValidationErrors errors, string[] deleteCollection);

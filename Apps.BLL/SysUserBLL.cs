@@ -42,6 +42,38 @@ namespace Apps.BLL
             queryData = LinqHelper.SortingAndPaging(queryData, pager.sort, pager.order, pager.page, pager.rows);
             return CreateModelList(ref queryData);
         }
+        public List<SysUserModel> GetListByPostId(string posId)
+        {
+
+            IQueryable<SysUser> queryData = null;
+            if (!string.IsNullOrWhiteSpace(posId))
+            {
+                queryData = m_Rep.GetList(db).Where(a => a.PosId.Contains(posId));
+            }
+            else
+            {
+                queryData = null;
+            }
+
+            return CreateModelList(ref queryData);
+        }
+        public List<SysUserModel> GetUserByDepId(ref GridPager pager, string str, string str2)
+        {
+
+            IQueryable<SysUser> queryData = null;
+            if (!string.IsNullOrWhiteSpace(str))
+            {
+                queryData = m_Rep.GetList(db).Where(a => a.DepId.Contains(str));
+            }
+            else
+            {
+                queryData = null;
+            }
+            pager.totalRows = queryData.Count();
+            queryData = LinqHelper.SortingAndPaging(queryData, pager.sort, pager.order, pager.page, pager.rows);
+            return CreateModelList(ref queryData);
+        }
+
         private List<SysUserModel> CreateModelList(ref IQueryable<SysUser> queryData)
         {
 
