@@ -217,6 +217,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Flow\Controllers\ApplyController.cs" />
     <Compile Include="Areas\Flow\Controllers\Flow_DraftController.cs" />
     <Compile Include="Areas\Flow\Controllers\Flow_FormAttrController.cs" />
     <Compile Include="Areas\Flow\Controllers\Flow_FormContentController.cs" />
@@ -582,6 +583,9 @@
     <Content Include="Areas\Flow\Views\Flow_Form\StepRuleList.cshtml" />
     <Content Include="Areas\Flow\Views\Flow_Draft\Index.cshtml" />
     <Content Include="Areas\Flow\Views\Flow_Draft\Create.cshtml" />
+    <Content Include="Areas\Flow\Views\Apply\Index.cshtml" />
+    <Content Include="Areas\Flow\Views\Apply\Details.cshtml" />
+    <Content Include="Areas\Flow\Views\Apply\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easyui\easyloader.js" />
     <Content Include="Scripts\easyui\jquery-1.8.0.min.js" />

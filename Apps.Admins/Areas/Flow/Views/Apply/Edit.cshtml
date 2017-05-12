@@ -1,0 +1,94 @@
+﻿@model Apps.Models.Flow.Flow_FormContentModel
+@using Apps.Common;
+@using Apps.Models.Flow;
+@using Apps.Admins;
+@using Apps.Admins.Core;
+@using Apps.Models.Sys;
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<permModel> perm = (List<permModel>)ViewBag.Perm;
+    if (perm == null)
+    {
+        perm = new List<permModel>();
+    }
+}
+<script type="text/javascript">
+    $(function () {
+        $("*[name='AttrA']").val("@Model.AttrA");
+        $("*[name='AttrB']").val("@Model.AttrB");
+        $("*[name='AttrC']").val("@Model.AttrC");
+        $("*[name='AttrD']").val("@Model.AttrD");
+        $("*[name='AttrE']").val("@Model.AttrE");
+        $("*[name='AttrF']").val("@Model.AttrF");
+        $("*[name='AttrG']").val("@Model.AttrG");
+        $("*[name='AttrH']").val("@Model.AttrH");
+        $("*[name='AttrI']").val("@Model.AttrI");
+        $("*[name='AttrJ']").val("@Model.AttrJ");
+        $("*[name='AttrK']").val("@Model.AttrK");
+        $("*[name='AttrL']").val("@Model.AttrL");
+        $("*[name='AttrM']").val("@Model.AttrM");
+        $("*[name='AttrN']").val("@Model.AttrN");
+        $("*[name='AttrO']").val("@Model.AttrO");
+        $("*[name='AttrP']").val("@Model.AttrP");
+        $("*[name='AttrQ']").val("@Model.AttrQ");
+        $("*[name='AttrR']").val("@Model.AttrR");
+        $("*[name='AttrS']").val("@Model.AttrS");
+        $("*[name='AttrT']").val("@Model.AttrT");
+        $("*[name='AttrU']").val("@Model.AttrU");
+        $("*[name='AttrV']").val("@Model.AttrV");
+        $("*[name='AttrW']").val("@Model.AttrW");
+        $("*[name='AttrX']").val("@Model.AttrX");
+        $("*[name='AttrY']").val("@Model.AttrY");
+        $("*[name='AttrZ']").val("@Model.AttrZ");
+    });
+</script>
+
+<div class="mvctool">
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+<table class="fromEditTable setTextWidth300">
+    <tbody>
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.FormId)
+        @Html.HiddenFor(model => model.UserId)
+        <input id="CreateTime" type="hidden" name="CreateTime" value="2017-5-12" />
+
+        <tr>
+            <td style="width:100px;text-align:right;">
+                @Html.LabelFor(model => model.Title);
+            </td>
+            <td style="width:310px;">
+                @Html.EditorFor(model => model.Title)
+            </td>
+        </tr>
+
+        @Html.Raw(ViewBag.Html)
+
+        <tr>
+            <td style="width:100px;text-align:right;">
+                @Html.LabelFor(model => model.TimeOut);
+            </td>
+            <td style="width:310px">
+                @Html.EditorFor(model => model.TimeOut)
+            </td>
+        </tr>
+
+        <tr>
+            <td style="width:100px;text-align:right;">
+                紧急程度：
+            </td>
+            <td>
+                <select name="FormLevel" id="FormLevel">
+                    <option value="普通">普通</option>
+                    <option value="重要">重要</option>
+                    <option value="紧急">紧急</option>
+                </select>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+<hr />
+@Html.Raw(ViewBag.StepCheckMes)

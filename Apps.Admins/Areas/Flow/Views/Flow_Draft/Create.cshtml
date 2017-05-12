@@ -71,17 +71,17 @@
 
             <input id="CreateTime" type="hidden" name="CrateTime" value="2017-5-2" />
             <input id="TimeOut" type="hidden" name="TimeOut" value="2117-5-2" />
-            @*<tr>
+            <tr>
                 <td style="width:100px;text-align:right;">
-                    @Html.LabelFor(model => model.Title);
+                    @Html.LabelFor(model => model.Title):
                 </td>
                 <td style="width:310px">
-                    @Html.EditorFor(model => model.Title);
+                    @Html.EditorFor(model => model.Title)
                 </td>
                 <td>
                     @Html.ValidationMessageFor(model => model.Title)
                 </td>
-            </tr>*@
+            </tr>
             @Html.Raw(ViewBag.Html)
             <tr>
                 <td style="width:100px; text-align:right;">紧急程度：</td>

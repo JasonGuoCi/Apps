@@ -15,7 +15,7 @@ namespace Apps.Models.Flow
         public string Id { get; set; }
 
         [MaxWordsExpression(200)]
-        [Display(Name = "Title")]
+        [Display(Name = "标题")]
         public string Title { get; set; }
 
         [MaxWordsExpression(50)]
@@ -143,5 +143,10 @@ namespace Apps.Models.Flow
 
         [Display(Name = "TimeOut")]
         public DateTime TimeOut { get; set; }
+
+        public string CurrentStep { get; set; }
+        public string CurrentState { get; set; }
+
+        public string Action { get; set; }
     }
 }

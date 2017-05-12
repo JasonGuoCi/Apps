@@ -17,5 +17,6 @@ namespace Apps.Flow.IBLL
         bool Edit(ref ValidationErrors errors, Flow_FormContentModel model);
         Flow_FormContentModel GetById(string id);
         bool IsExist(string id);
+        List<Flow_FormContentModel> GetListByUserId(ref GridPager pager, string queryStr, string userId);
     }
 }

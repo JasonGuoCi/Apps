@@ -209,5 +209,10 @@ namespace Apps.Flow.BLL
         {
             return m_Rep.IsExist(id);
         }
+
+        public Flow_FormContentStepCheckStateModel GetByStepCheckId(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

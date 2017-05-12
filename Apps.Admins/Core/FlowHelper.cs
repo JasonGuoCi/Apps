@@ -45,5 +45,10 @@ namespace Apps.Admins.Core
         {
             throw new NotImplementedException();
         }
+
+        internal string GetCurrentStepCheckIdByStepCheckModelList(List<Flow_FormContentStepCheckModel> stepCheckModelList)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

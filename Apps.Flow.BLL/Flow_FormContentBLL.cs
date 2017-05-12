@@ -316,5 +316,21 @@ namespace Apps.Flow.BLL
             return m_Rep.IsExist(id);
         }
 
+        public List<Flow_FormContentModel> GetListByUserId(ref GridPager pager, string queryStr, string userId)
+        {
+            IQueryable<Flow_FormContent> queryData = null;
+            if (!string.IsNullOrWhiteSpace(queryStr))
+            {
+                queryData = m_Rep.GetList(db).Where(a => a.UserId == userId && a.Title.Contains(queryStr));
+            }
+            else
+            {
+                queryData = m_Rep.GetList(db).Where(a => a.UserId == userId);
+            }
+
+            pager.totalRows = queryData.Count();
+            queryData = LinqHelper.SortingAndPaging(queryData, pager.sort, pager.order, pager.page, pager.rows);
+            return CreateModelList(ref queryData);
+        }
     }
 }

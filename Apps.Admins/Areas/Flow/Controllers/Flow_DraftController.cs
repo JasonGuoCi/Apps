@@ -94,7 +94,7 @@ namespace Apps.Admins.Areas.Flow.Controllers
             }
             #endregion
 
-            sbJS.Append("return type}</script>");
+            sbJS.Append("return true}</script>");
             ViewBag.HtmlJS = sbJS.ToString();
             return sbHtml.ToString();
         }
@@ -171,19 +171,23 @@ namespace Apps.Admins.Areas.Flow.Controllers
                         {
                             //获得流转规则下的审核人员
                             List<string> userIdList = GetStepCheckMemberList(stepModel.Id, model.Id);
-                            foreach (string userId in userIdList)
+                            if (userIdList.Count > 0)
                             {
-                                //批量建立步骤审核人表
-                                Flow_FormContentStepCheckStateModel stepCheckStateModel = new Flow_FormContentStepCheckStateModel();
-                                stepCheckStateModel.Id = ResultHelper.NewId;
-                                stepCheckStateModel.StepCheckId = stepCheckModel.Id;
-                                stepCheckStateModel.UserId = userId;
-                                stepCheckStateModel.CheckFlag = 2;
-                                stepCheckStateModel.Reamrk = "";
-                                stepCheckStateModel.TheSeal = "";
-                                stepCheckStateModel.CreateTime = ResultHelper.NowTime;
-                                stepCheckStateBLL.Create(ref errors, stepCheckStateModel);
+                                foreach (string userId in userIdList)
+                                {
+                                    //批量建立步骤审核人表
+                                    Flow_FormContentStepCheckStateModel stepCheckStateModel = new Flow_FormContentStepCheckStateModel();
+                                    stepCheckStateModel.Id = ResultHelper.NewId;
+                                    stepCheckStateModel.StepCheckId = stepCheckModel.Id;
+                                    stepCheckStateModel.UserId = userId;
+                                    stepCheckStateModel.CheckFlag = 2;
+                                    stepCheckStateModel.Reamrk = "";
+                                    stepCheckStateModel.TheSeal = "";
+                                    stepCheckStateModel.CreateTime = ResultHelper.NowTime;
+                                    stepCheckStateBLL.Create(ref errors, stepCheckStateModel);
+                                }
                             }
+
                         }
 
                         if (IsEnd)//如果是最后一步就无需要下面继续了
@@ -218,10 +222,14 @@ namespace Apps.Admins.Areas.Flow.Controllers
             {
                 SysUserModel userModel = userBLL.GetById(GetUserId());
                 string[] array = userModel.Lead.Split(',');//获得领导，可能有多个领导
-                foreach (var item in array)
+                if (array.Length > 0)
                 {
-                    userModelList.Add(item);
+                    foreach (var item in array)
+                    {
+                        userModelList.Add(item);
+                    }
                 }
+
 
             }
             else if (stepModel.FlowRule == "职位")
@@ -230,10 +238,14 @@ namespace Apps.Admins.Areas.Flow.Controllers
                 foreach (var item in array)
                 {
                     List<SysUserModel> userList = userBLL.GetListByPostId(item);
-                    foreach (SysUserModel userModel in userList)
+                    if (userList.Count > 0)
                     {
-                        userModelList.Add(userModel.Id);
+                        foreach (SysUserModel userModel in userList)
+                        {
+                            userModelList.Add(userModel.Id);
+                        }
                     }
+
                 }
             }
             else if (stepModel.FlowRule == "部门")
@@ -246,32 +258,44 @@ namespace Apps.Admins.Areas.Flow.Controllers
                     order = "desc"
                 };
                 string[] array = stepModel.Execution.Split(',');//获得领导，可能有多个领导
-                foreach (string str in array)
+                if (array.Length > 0)
                 {
-                    List<SysUserModel> userList = userBLL.GetUserByDepId(ref pager, str, "");
-                    foreach (SysUserModel user in userList)
+                    foreach (string str in array)
                     {
-                        userModelList.Add(user.Id);
+                        List<SysUserModel> userList = userBLL.GetUserByDepId(ref pager, str, "");
+                        foreach (SysUserModel user in userList)
+                        {
+                            userModelList.Add(user.Id);
+                        }
                     }
                 }
+
 
             }
             else if (stepModel.FlowRule == "人员")
             {
                 string[] array = stepModel.Execution.Split(',');
-                foreach (var item in array)
+                if (array.Length > 0)
                 {
-                    userModelList.Add(item);
+                    foreach (var item in array)
+                    {
+                        userModelList.Add(item);
+                    }
                 }
+
             }
             else if (stepModel.FlowRule == "自选")
             {
                 string users = formContentBLL.GetById(formContentId).CustomMember;
                 string[] array = users.Split(',');
-                foreach (var item in array)
+                if (array.Length > 0)
                 {
-                    userModelList.Add(item);
+                    foreach (var item in array)
+                    {
+                        userModelList.Add(item);
+                    }
                 }
+
             }
             return userModelList;
         }

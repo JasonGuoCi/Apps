@@ -17,5 +17,6 @@ namespace Apps.Flow.IBLL
         bool Edit(ref ValidationErrors errors, Flow_FormContentStepCheckModel model);
         Flow_FormContentStepCheckModel GetById(string id);
         bool IsExist(string id);
+        List<Flow_FormContentStepCheckModel> GetListByFormId(string formId, string id);
     }
 }

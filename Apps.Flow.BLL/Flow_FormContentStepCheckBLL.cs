@@ -209,5 +209,22 @@ namespace Apps.Flow.BLL
         {
             return m_Rep.IsExist(id);
         }
+
+        public List<Flow_FormContentStepCheckModel> GetListByFormId(string formId, string id)
+        {
+
+            IQueryable<Flow_FormContentStepCheck> queryData = null;
+            if (!string.IsNullOrWhiteSpace(formId))
+            {
+                queryData = m_Rep.GetList(db).Where(a => a.ContentId.Contains(id) || a.StepId.Contains(formId));
+            }
+            else
+            {
+                queryData = m_Rep.GetList(db);
+            }
+            //pager.totalRows = queryData.Count();
+            //queryData = LinqHelper.SortingAndPaging(queryData, pager.sort, pager.order, pager.page, pager.rows);
+            return CreateModelList(ref queryData);
+        }
     }
 }
