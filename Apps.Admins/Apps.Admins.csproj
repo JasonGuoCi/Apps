@@ -95,6 +95,22 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Senparc.Weixin, Version=4.12.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.4.12.3\lib\net45\Senparc.Weixin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP, Version=14.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.MP.14.4.7\lib\net45\Senparc.Weixin.MP.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP.MvcExtension, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.MP.MVC.4.5.0\lib\net45\Senparc.Weixin.MP.MvcExtension.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -157,9 +173,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -232,6 +245,9 @@
     <Compile Include="Areas\MIS\Controllers\ArticleController.cs" />
     <Compile Include="Areas\MIS\Controllers\CategoryController.cs" />
     <Compile Include="Areas\MIS\MISAreaRegistration.cs" />
+    <Compile Include="Areas\WeChat\Controllers\WC_MessageResponseController.cs" />
+    <Compile Include="Areas\WeChat\Controllers\WeChatController.cs" />
+    <Compile Include="Areas\WeChat\WeChatAreaRegistration.cs" />
     <Compile Include="BaseController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseException.cs" />
@@ -586,6 +602,10 @@
     <Content Include="Areas\Flow\Views\Apply\Index.cshtml" />
     <Content Include="Areas\Flow\Views\Apply\Details.cshtml" />
     <Content Include="Areas\Flow\Views\Apply\Edit.cshtml" />
+    <Content Include="Areas\WeChat\Views\web.config" />
+    <Content Include="Areas\WeChat\Views\WeChat\Index.cshtml" />
+    <Content Include="Areas\WeChat\Views\WeChat\Create.cshtml" />
+    <Content Include="Areas\WeChat\Views\WeChat\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easyui\easyloader.js" />
     <Content Include="Scripts\easyui\jquery-1.8.0.min.js" />
@@ -1020,6 +1040,9 @@
     <Folder Include="Areas\Flow\Views\Shared\" />
     <Folder Include="Areas\MIS\Models\" />
     <Folder Include="Areas\MIS\Views\Shared\" />
+    <Folder Include="Areas\WeChat\Models\" />
+    <Folder Include="Areas\WeChat\Views\Shared\" />
+    <Folder Include="Areas\WeChat\Views\WC_MessageResponse\" />
     <Folder Include="Scripts\easyui\demo\" />
     <Folder Include="Scripts\kindeditor\attached\" />
     <Folder Include="Views\Base\" />

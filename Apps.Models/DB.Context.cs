@@ -48,6 +48,8 @@ namespace Apps.Models
         public virtual DbSet<Flow_Step> Flow_Step { get; set; }
         public virtual DbSet<Flow_StepRule> Flow_StepRule { get; set; }
         public virtual DbSet<Flow_Type> Flow_Type { get; set; }
+        public virtual DbSet<WC_OfficalAccounts> WC_OfficalAccounts { get; set; }
+        public virtual DbSet<WC_MessageResponse> WC_MessageResponse { get; set; }
     
         public virtual ObjectResult<P_Sys_GetRightOperate_Result> P_Sys_GetRightOperate(string userId, string url)
         {

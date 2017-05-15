@@ -175,6 +175,14 @@
     <Compile Include="Sys\SysSampleModel.cs" />
     <Compile Include="Sys\SysStructModel.cs" />
     <Compile Include="Sys\SysUserModel.cs" />
+    <Compile Include="WC_MessageResponse.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WC_OfficalAccounts.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeChat\WC_MessageResponseModel.cs" />
+    <Compile Include="WeChat\WC_OfficalAccountsModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apps.Common\Apps.Common.csproj">

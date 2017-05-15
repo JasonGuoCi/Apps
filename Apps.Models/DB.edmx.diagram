@@ -46,6 +46,9 @@
         <AssociationConnector Association="AppsDBModel.FK_Flow_FormContentStepCheckState_Flow_FormContentStepCheck" />
         <AssociationConnector Association="AppsDBModel.FK_Flow_FormContentStepCheckState_SysUser" />
         <AssociationConnector Association="AppsDBModel.FK_Flow_StepRule_Flow_Step" />
+        <EntityTypeShape EntityType="AppsDBModel.WC_OfficalAccounts" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AppsDBModel.WC_MessageResponse" Width="1.5" PointX="15.625" PointY="0.75" />
+        <AssociationConnector Association="AppsDBModel.FK_WC_MessageResponse_WC_OfficalAcconts" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

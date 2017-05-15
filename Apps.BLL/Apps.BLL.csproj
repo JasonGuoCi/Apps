@@ -83,6 +83,8 @@
     <Compile Include="SysSampleBLL.cs" />
     <Compile Include="SysStructBLL.cs" />
     <Compile Include="SysUserBLL.cs" />
+    <Compile Include="WC_MessageResponseBLL.cs" />
+    <Compile Include="WC_OfficalAccountsBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apps.Common\Apps.Common.csproj">

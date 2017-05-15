@@ -359,6 +359,54 @@
           <Property Name="IsReportCalendar" Type="bit" Nullable="false" />
           <Property Name="IsSecretary" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="WC_MessageResponse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OfficalAccountId" Type="varchar" MaxLength="50" />
+          <Property Name="MessageRule" Type="int" />
+          <Property Name="Category" Type="int" />
+          <Property Name="MatchKey" Type="varchar" MaxLength="1000" />
+          <Property Name="TextContent" Type="varchar(max)" />
+          <Property Name="ImgTextContext" Type="varchar(max)" />
+          <Property Name="ImgTextUrl" Type="varchar" MaxLength="1000" />
+          <Property Name="ImgTextLink" Type="varchar" MaxLength="1000" />
+          <Property Name="MeidaUrl" Type="varchar" MaxLength="1000" />
+          <Property Name="MeidaLink" Type="varchar" MaxLength="1000" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="2000" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifyTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WC_OfficalAccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OfficalId" Type="varchar" MaxLength="200" />
+          <Property Name="OfficalName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="OfficalCode" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="OfficalPhoto" Type="varchar" MaxLength="1000" />
+          <Property Name="OfficalKey" Type="varchar" MaxLength="500" />
+          <Property Name="ApiUrl" Type="varchar" MaxLength="1000" />
+          <Property Name="Token" Type="varchar" MaxLength="200" />
+          <Property Name="AppId" Type="varchar" MaxLength="200" />
+          <Property Name="AppSecret" Type="varchar" MaxLength="200" />
+          <Property Name="AccessToken" Type="varchar" MaxLength="200" />
+          <Property Name="Remark" Type="varchar" MaxLength="2000" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifyTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="varchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_Flow_Form_Flow_Type">
           <End Role="Flow_Type" Type="Self.Flow_Type" Multiplicity="1" />
           <End Role="Flow_Form" Type="Self.Flow_Form" Multiplicity="*" />
@@ -623,6 +671,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WC_MessageResponse_WC_OfficalAcconts">
+          <End Role="WC_OfficalAccounts" Type="Self.WC_OfficalAccounts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WC_MessageResponse" Type="Self.WC_MessageResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WC_OfficalAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WC_MessageResponse">
+              <PropertyRef Name="OfficalAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="P_Sys_ClearUnusedRightOperate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="P_Sys_DeleteSysRoleSysUserByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="roleId" Type="varchar" Mode="In" />
@@ -676,6 +738,8 @@
           <EntitySet Name="SysSample" EntityType="Self.SysSample" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysStruct" EntityType="Self.SysStruct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysUser" EntityType="Self.SysUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WC_MessageResponse" EntityType="Self.WC_MessageResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WC_OfficalAccounts" EntityType="Self.WC_OfficalAccounts" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Flow_Form_Flow_Type" Association="Self.FK_Flow_Form_Flow_Type">
             <End Role="Flow_Type" EntitySet="Flow_Type" />
             <End Role="Flow_Form" EntitySet="Flow_Form" />
@@ -759,6 +823,10 @@
           <AssociationSet Name="FK_SysStruct_SysStruct" Association="Self.FK_SysStruct_SysStruct">
             <End Role="SysStruct" EntitySet="SysStruct" />
             <End Role="SysStruct1" EntitySet="SysStruct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WC_MessageResponse_WC_OfficalAcconts" Association="Self.FK_WC_MessageResponse_WC_OfficalAcconts">
+            <End Role="WC_OfficalAccounts" EntitySet="WC_OfficalAccounts" />
+            <End Role="WC_MessageResponse" EntitySet="WC_MessageResponse" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -908,6 +976,12 @@
           <AssociationSet Name="FK_Flow_StepRule_Flow_Step" Association="AppsDBModel.FK_Flow_StepRule_Flow_Step">
             <End Role="Flow_Step" EntitySet="Flow_Step" />
             <End Role="Flow_StepRule" EntitySet="Flow_StepRule" />
+          </AssociationSet>
+          <EntitySet Name="WC_OfficalAccounts" EntityType="AppsDBModel.WC_OfficalAccounts" />
+          <EntitySet Name="WC_MessageResponse" EntityType="AppsDBModel.WC_MessageResponse" />
+          <AssociationSet Name="FK_WC_MessageResponse_WC_OfficalAcconts" Association="AppsDBModel.FK_WC_MessageResponse_WC_OfficalAcconts">
+            <End Role="WC_OfficalAccounts" EntitySet="WC_OfficalAccounts" />
+            <End Role="WC_MessageResponse" EntitySet="WC_MessageResponse" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="SysModule">
@@ -1581,6 +1655,70 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="WC_OfficalAccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OfficalId" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OfficalName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OfficalCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OfficalPhoto" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="OfficalKey" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ApiUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AppId" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AppSecret" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AccessToken" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="WC_MessageResponse" Relationship="AppsDBModel.FK_WC_MessageResponse_WC_OfficalAcconts" FromRole="WC_OfficalAccounts" ToRole="WC_MessageResponse" />
+        </EntityType>
+        <EntityType Name="WC_MessageResponse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OfficalAccountId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MessageRule" Type="Int32" />
+          <Property Name="Category" Type="Int32" />
+          <Property Name="MatchKey" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ImgTextContext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ImgTextUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ImgTextLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="MeidaUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="MeidaLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="WC_OfficalAccounts" Relationship="AppsDBModel.FK_WC_MessageResponse_WC_OfficalAcconts" FromRole="WC_MessageResponse" ToRole="WC_OfficalAccounts" />
+        </EntityType>
+        <Association Name="FK_WC_MessageResponse_WC_OfficalAcconts">
+          <End Type="AppsDBModel.WC_OfficalAccounts" Role="WC_OfficalAccounts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AppsDBModel.WC_MessageResponse" Role="WC_MessageResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WC_OfficalAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WC_MessageResponse">
+              <PropertyRef Name="OfficalAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2037,6 +2175,56 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WC_OfficalAccounts">
+            <EntityTypeMapping TypeName="AppsDBModel.WC_OfficalAccounts">
+              <MappingFragment StoreEntitySet="WC_OfficalAccounts">
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="AppSecret" ColumnName="AppSecret" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="ApiUrl" ColumnName="ApiUrl" />
+                <ScalarProperty Name="OfficalKey" ColumnName="OfficalKey" />
+                <ScalarProperty Name="OfficalPhoto" ColumnName="OfficalPhoto" />
+                <ScalarProperty Name="OfficalCode" ColumnName="OfficalCode" />
+                <ScalarProperty Name="OfficalName" ColumnName="OfficalName" />
+                <ScalarProperty Name="OfficalId" ColumnName="OfficalId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WC_MessageResponse">
+            <EntityTypeMapping TypeName="AppsDBModel.WC_MessageResponse">
+              <MappingFragment StoreEntitySet="WC_MessageResponse">
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="MeidaLink" ColumnName="MeidaLink" />
+                <ScalarProperty Name="MeidaUrl" ColumnName="MeidaUrl" />
+                <ScalarProperty Name="ImgTextLink" ColumnName="ImgTextLink" />
+                <ScalarProperty Name="ImgTextUrl" ColumnName="ImgTextUrl" />
+                <ScalarProperty Name="ImgTextContext" ColumnName="ImgTextContext" />
+                <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+                <ScalarProperty Name="MatchKey" ColumnName="MatchKey" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="MessageRule" ColumnName="MessageRule" />
+                <ScalarProperty Name="OfficalAccountId" ColumnName="OfficalAccountId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

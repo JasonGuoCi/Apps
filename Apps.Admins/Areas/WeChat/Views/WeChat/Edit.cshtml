@@ -1,0 +1,225 @@
+﻿@model Apps.Models.WeChat.WC_OfficalAccountsModel
+@using Apps.Common;
+@using Apps.Models.Flow;
+@using Apps.Admins;
+@using Apps.Admins.Core;
+@using Apps.Models.Sys;
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Index_LayoutEdit.cshtml";
+    List<permModel> perm = (List<permModel>)ViewBag.Perm;
+    if (perm == null)
+    {
+        perm = new List<permModel>();
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").click(function () {
+            if ($("form").valid()) {
+                $.ajax({
+                    url: "@Url.Action("Edit")",
+                    type: "Post",
+                    data: $("form").serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.type == 1) {
+                            window.parent.frameReturnByMes(data.message);
+                            window.parent.frameReturnByReload(true);
+                            window.parent.frameReturnByClose()
+                        }
+                        else {
+                            window.parent.frameReturnByMes(data.message);
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+        $("#btnReturn").click(function () {
+            window.parent.frameReturnByClose();
+        });
+    });
+</script>
+<div class="mvctool bgb">
+    @Html.ToolButton("btnSave", "icon-save", "保存", perm, "Save", true)
+    @Html.ToolButton("btnReturn", "icon-return", "返回", false)
+</div>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CreateTime)
+    <table class="fromEditTable setTextWidth300">
+        <tbody>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.OfficalId)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.OfficalId)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.OfficalId)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.OfficalName)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.OfficalName)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.OfficalName)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.OfficalCode)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.OfficalCode)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.OfficalCode)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.OfficalPhoto)：
+                </td>
+                <td style="width:310px">
+                    @Html.HiddenFor(model => model.OfficalPhoto)
+                    <img class="expic" src="@((Model.OfficalPhoto==null||Model.OfficalPhoto=="")?"/Content/Images/NotPic.jpg":Model.OfficalPhoto)" /><br />
+                    <a href="javascript:$('#FileUpload').trigger('click');" class="files">
+                        <input type="file" size="10" value="" id="FileUpload" name="FileUpload" onchange="Upload('SingleFile', 'OfficalPhoto', 'FileUpload','1','1');" />
+                    </a><span class="uploading">请稍候...</span>
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.OfficalPhoto)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.OfficalKey)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.OfficalKey)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.OfficalKey)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.ApiUrl)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.ApiUrl)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.ApiUrl)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Token)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Token)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Token)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.AppId)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.AppId)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.AppId)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.AppSecret)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.AppSecret)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.AppSecret)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.AccessToken)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.AccessToken)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.AccessToken)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Remark)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Remark)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Remark)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Enable)：
+                </td>
+                <td style="width:310px">
+                    @Html.CheckBoxFor(model => model.Enable)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Enable)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.IsDefault)：
+                </td>
+                <td style="width:310px">
+                    @Html.CheckBoxFor(model => model.IsDefault)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.IsDefault)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.Category)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.Category)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.Category)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.CreateTime)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.CreateTime)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.CreateTime)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.CreateBy)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.CreateBy)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.CreateBy)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.ModifyTime)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.ModifyTime)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.ModifyTime)</td>
+            </tr>
+            <tr>
+                <td style="width:100px; text-align:right;">
+                    @Html.LabelFor(model => model.ModifyBy)：
+                </td>
+                <td style="width:310px">
+                    @Html.EditorFor(model => model.ModifyBy)
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.ModifyBy)</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+

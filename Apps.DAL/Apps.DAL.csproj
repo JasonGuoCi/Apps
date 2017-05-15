@@ -62,6 +62,8 @@
     <Compile Include="SysSampleRepository.cs" />
     <Compile Include="SysStructRepository.cs" />
     <Compile Include="SysUserRepository.cs" />
+    <Compile Include="WC_MessageResponseRepository.cs" />
+    <Compile Include="WC_OfficalAccountsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apps.Common\Apps.Common.csproj">

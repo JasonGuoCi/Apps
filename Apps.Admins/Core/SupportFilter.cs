@@ -1,4 +1,5 @@
 ﻿using Apps.BLL;
+using Apps.Common;
 using Apps.DAL;
 using Apps.Models.Sys;
 using System;
@@ -19,7 +20,7 @@ namespace Apps.Admins.Core
         {
             //OnlineHttpModule.ProcessRequest();
             base.OnActionExecuted(filterContext);
-            
+
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -69,6 +70,20 @@ namespace Apps.Admins.Core
             }
 
             id = string.IsNullOrEmpty(id) ? "" : id;
+
+            #region wechat project add 
+            var actionParameters = filterContext.ActionDescriptor.GetParameters();
+            foreach (var p in actionParameters)
+            {
+                if (p.ParameterType == typeof(string))
+                {
+                    if (filterContext.ActionParameters[p.ParameterName] != null)
+                    {
+                        filterContext.ActionParameters[p.ParameterName] = ResultHelper.FormatStr(filterContext.ActionParameters[p.ParameterName].ToString());
+                    }
+                }
+            }
+            #endregion
 
             //URL路径
             string filePath = HttpContext.Current.Request.FilePath;

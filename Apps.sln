@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apps.Flow.IBLL", "Apps.Flow
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apps.Flow.BLL", "Apps.Flow.BLL\Apps.Flow.BLL.csproj", "{16436753-CBEF-4739-8BF1-859F59206013}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apps.WebChat", "Apps.WebChat\Apps.WebChat.csproj", "{6F820F56-BEDC-4024-9223-25D5FB062111}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{16436753-CBEF-4739-8BF1-859F59206013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16436753-CBEF-4739-8BF1-859F59206013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16436753-CBEF-4739-8BF1-859F59206013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F820F56-BEDC-4024-9223-25D5FB062111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F820F56-BEDC-4024-9223-25D5FB062111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F820F56-BEDC-4024-9223-25D5FB062111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F820F56-BEDC-4024-9223-25D5FB062111}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

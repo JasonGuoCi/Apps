@@ -61,6 +61,8 @@
     <Compile Include="ISysSampleRepository.cs" />
     <Compile Include="ISysStructRepository.cs" />
     <Compile Include="ISysUserRepository.cs" />
+    <Compile Include="IWC_MessageResponseRepository.cs" />
+    <Compile Include="IWC_OfficalAccountsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

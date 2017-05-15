@@ -61,6 +61,8 @@
     <Compile Include="ISysSampleBLL.cs" />
     <Compile Include="ISysStructBLL.cs" />
     <Compile Include="ISysUserBLL.cs" />
+    <Compile Include="IWC_MessageResponseBLL.cs" />
+    <Compile Include="IWC_OfficalAccountsBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
