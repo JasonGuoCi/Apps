@@ -1,32 +1,22 @@
-﻿using Apps.Common;
-using Apps.Common.Handlers;
-using Apps.IBLL;
-using Apps.Models.WeChat;
-using Microsoft.Practices.Unity;
-using Senparc.Weixin.MP;
-using Senparc.Weixin.MP.Entities.Request;
-using Senparc.Weixin.MP.MvcExtension;
+﻿using Apps.WebChat.Core;
+using Apps.WebChat.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
-
-using System.Threading.Tasks;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 
 namespace Apps.WebChat.Controllers
 {
     public class WeChatController : Controller
     {
-        [Dependency]
-        public IWC_OfficalAccountsBLL account_BLL { get; set; }
-        ValidationErrors errors = new ValidationErrors();
-
-        public static readonly string Token = "JasonWebChatToken";//与微信公众账号后台的Token设置保持一致，区分大小写。
-        public static readonly string EncodingAESKey = "9lR462ktbYvl95nPO8adXeSRA8r62ieVo7cEZxeESL0";//与微信公众账号后台的EncodingAESKey设置保持一致，区分大小写。
-        public static readonly string AppId = "wx56e163a2c608471b";//与微信公众账号后台的AppId设置保持一致，区分大小写。
-
-
+        public static readonly string WeChatToken = ConfigurationManager.AppSettings["Token"];
+        public static readonly string EncodingAESKey = ConfigurationManager.AppSettings["EncodingAESKey"];
+        public static readonly string AppId = ConfigurationManager.AppSettings["AppId"];
         // GET: WeChat
         public ActionResult Index()
         {
@@ -35,73 +25,106 @@ namespace Apps.WebChat.Controllers
 
         [HttpGet]
         [ActionName("Index")]
-        public Task<ActionResult> Get(string signature, string timestamp, string nonce, string echostr)
+        public ActionResult Get(string signature, string timestamp, string nonce, string echostr)
         {
-
-            return Task.Factory.StartNew(() =>
+            if (string.IsNullOrEmpty(WeChatToken))
             {
-                if (CheckSignature.Check(signature, timestamp, nonce, Token))
-                {
-                    return echostr;//返回随机字符串则表示验证通过
-                }
-                else
-                {
-                    return "failed:" + signature + "," + CheckSignature.GetSignature(timestamp, nonce, Token) + "。" +
-                        "如果你在浏览器中看到这句话，说明此地址可以被作为微信公众账号后台的Url，请注意保持Token一致。";
-                }
-            }).ContinueWith<ActionResult>(task => Content(task.Result));
+                return Content("请先设置Token！");
+            }
+            if (WXHelper.CheckSignature(WeChatToken, signature, timestamp, nonce))
+            {
+                return Content(echostr);
+            }
+            else
+            {
+                return Content("Failed:" + signature + ", " + WXHelper.GetSignature(timestamp, nonce, WeChatToken) + "。如果你在浏览器中看到这个，说明此URL可以植入微信后台。");
+            }
         }
-
         [HttpPost]
         [ActionName("Index")]
-        public Task<ActionResult> Post(PostModel postModel)
+        public ActionResult Post(WeChatRequestModel model)
         {
-            return Task.Factory.StartNew<ActionResult>(() =>
+            Stream requestStream = System.Web.HttpContext.Current.Request.InputStream;
+            byte[] requestByte = new byte[requestStream.Length];
+            requestStream.Read(requestByte, 0, (int)requestStream.Length);
+            string requestStr = Encoding.UTF8.GetString(requestByte);
+            var XML = "";
+
+            if (!string.IsNullOrEmpty(requestStr))
             {
-                WC_OfficalAccountsModel model = account_BLL.GetCurrentAccount();
-                //没有参数
-                if (string.IsNullOrEmpty(Request["id"]))
+                //封装请求类
+                var requestDocXml = new XmlDocument();
+                requestDocXml.LoadXml(requestStr);
+                var rootElement = requestDocXml.DocumentElement;
+
+                if (rootElement == null)
                 {
-                    return new WeixinResult("非法路径请求");
+                    return Content("There is no element!");
                 }
-                if (!CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, model.Token))
+
+                var wxXmlModel = new WxXmlModel
                 {
-                    return new WeixinResult("参数错误！");
-                }
+                    ToUserName = rootElement.SelectSingleNode("ToUserName").InnerText,
+                    FromUserName = rootElement.SelectSingleNode("FromUserName").InnerText,
+                    CreateTime = rootElement.SelectSingleNode("CreateTime").InnerText,
+                    MsgType = rootElement.SelectSingleNode("MsgType").InnerText
+                };
 
-                postModel.Token = Token;
-                postModel.EncodingAESKey = EncodingAESKey; //根据自己后台的设置保持一致
-                postModel.AppId = model.AppId;//根据自己后台的设置保持一致
-
-                var messageHandler = new CustomMessageHandler(Request.InputStream, postModel, 10);
-                messageHandler.Execute(); //执行微信处理过程
-
-                return new FixWeixinBugWeixinResult(messageHandler);
-
-            }).ContinueWith<ActionResult>(task => task.Result);
-        }
-
-        public JsonResult GetToken()
-        {
-            GridPager setNoPagerAscById = new GridPager
-            {
-                sort = "Id",
-                rows = 100,
-                order = "asc",
-                page = 1
-            };
-            List<WC_OfficalAccountsModel> list = account_BLL.GetList(ref setNoPagerAscById, "");
-            foreach (var model in list)
-            {
-                if (!string.IsNullOrEmpty(model.Id) && !string.IsNullOrEmpty(model.AppSecret))
+                switch (wxXmlModel.MsgType)
                 {
-                    model.AccessToken = Senparc.Weixin.MP.CommonAPIs.CommonApi.GetToken(model.AppId, model.AppSecret).access_token;
-                    model.ModifyTime = ResultHelper.NowTime;
-                    account_BLL.Edit(ref errors, model);
+                    case "Text"://文本
+                        wxXmlModel.Content = rootElement.SelectSingleNode("Content").InnerText;
+                        XML = ResponseMessage.GetText(wxXmlModel.FromUserName, wxXmlModel.ToUserName, wxXmlModel.Content);
+                        break;
+                    case "Image"://图片
+                        wxXmlModel.PicUrl = rootElement.SelectSingleNode("PicUrl").InnerText;
+                        break;
+                    //case "Voice"://语音
+                    //    wxXmlModel.PicUrl = rootElement.SelectSingleNode("Media_id").InnerText;
+                    //    break;
+                    //case "Video"://视频
+                    //    wxXmlModel.PicUrl = rootElement.SelectSingleNode("Media_id").InnerText;
+                    //    break;
+                    //case "Shortvideo"://小视频
+                    //    wxXmlModel.PicUrl = rootElement.SelectSingleNode("Media_id").InnerText;
+                    //    break;
+                    //case "Location"://位置
+                    //    wxXmlModel.Location_X = rootElement.SelectSingleNode("Location_X").InnerText;
+                    //    wxXmlModel.Location_Y = rootElement.SelectSingleNode("Location_Y").InnerText;
+                    //    break;
+
+                    case "event"://事件
+
+                        wxXmlModel.Event = rootElement.SelectSingleNode("Event").InnerText;
+                        switch (wxXmlModel.Event)
+                        {
+                            case "subscribe":
+                                if (string.IsNullOrEmpty(wxXmlModel.EventKey))
+                                {
+                                    XML = ResponseMessage.GetText(wxXmlModel.FromUserName, wxXmlModel.ToUserName, "关注成功");
+                                }
+                                else
+                                {
+                                    XML = ResponseMessage.GetText(wxXmlModel.FromUserName, wxXmlModel.ToUserName, wxXmlModel.EventKey);
+                                }
+                                break;
+
+                            case "SCAN":
+                                XML = ResponseMessage.ScanQrcode(wxXmlModel.FromUserName, wxXmlModel.ToUserName, wxXmlModel.EventKey);//扫描已关注二维码已关注，直接推送事件
+                                break;
+                        }
+                        if (wxXmlModel.Event != "TEMPLATESENDJOBFINISH")//关注类型
+                        {
+                            wxXmlModel.EventKey = rootElement.SelectSingleNode("EventKey").InnerText;
+                        }
+                        break;
+
+                    default:
+                        break;
                 }
+
             }
-
-            return Json(JsonHandler.CreateMessage(1, "成批更新成功"));
+            return Content(XML);
         }
     }
 }
